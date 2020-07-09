@@ -5,6 +5,7 @@
     </head>
     <body>
         <main class="py-4">
+            @include('partials.sidebar')
             @yield('content')
         </main>
     </body>
