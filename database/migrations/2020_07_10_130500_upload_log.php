@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TrxTrainings extends Migration
+class UploadLog extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class TrxTrainings extends Migration
      */
     public function up()
     {
-        Schema::create('trx_trainings', function (Blueprint $table) {
+        Schema::create('upload_log', function (Blueprint $table) {
             $table->id();
+            $table->string('file_name')->nullable();
             $table->string('training_name')->nullable();
-            $table->integer('training_year')->nullable();
+            $table->string('uploader_name')->nullable();
             $table->timestamps();
-        });
-
-        Schema::table('trx_trainings', function (Blueprint $table) {
-            $table->foreignId('nip')->constrained('participants')->onDelete('cascade');
         });
     }
 
