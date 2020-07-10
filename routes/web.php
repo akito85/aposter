@@ -17,3 +17,5 @@ Auth::routes();
 Route::get('/', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');
+
+Route::post('/fileUpload', 'Pages\UploadController@fileUpload')->name('file-upload');
