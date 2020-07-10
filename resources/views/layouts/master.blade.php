@@ -4,9 +4,12 @@
         @include('partials.header')
     </head>
     <body>
-        <main class="py-4">
-            @include('partials.sidebar')
-            @yield('content')
+        <main class="main-panel">
+            <div class="content">
+                @include('partials.sidebar')
+                @yield('content')
+            </div>
         </main>
+        @yield('custom_js')
     </body>
 </html>
