@@ -11,5 +11,5 @@ class UploadLogModel extends Model
         'file_name',
         'training_name',
         'uploader_name'
-    ]
+    ];
 }
