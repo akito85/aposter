@@ -15,7 +15,7 @@ class Participants extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->integer('nip')->unique();
+            $table->string('nip')->unique();
             $table->string('name')->nullable();
             $table->string('satker')->nullable();
             $table->string('class')->nullable();
@@ -37,6 +37,8 @@ class Participants extends Migration
             $table->string('work_phone')->nullable();
             $table->string('work_fax')->nullable();
             $table->string('marrital_status')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->string('degree')->nullable();
             $table->string('campus_name')->nullable();
             $table->string('work_position_id')->nullable();
             $table->string('work_position')->nullable();

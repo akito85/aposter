@@ -15,13 +15,14 @@ class TrxTrainings extends Migration
     {
         Schema::create('trx_trainings', function (Blueprint $table) {
             $table->id();
+            $table->string('nip');
             $table->string('training_name')->nullable();
             $table->integer('training_year')->nullable();
             $table->timestamps();
         });
 
         Schema::table('trx_trainings', function (Blueprint $table) {
-            $table->foreignId('nip')->constrained('participants')->onDelete('cascade');
+            $table->foreign('nip')->references('nip')->on('participants')->onDelete('cascade');
         });
     }
 
