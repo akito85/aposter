@@ -15,7 +15,7 @@ class Participants extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->string('nip')->unique();
+            $table->integer('nip')->unique();
             $table->string('name')->nullable();
             $table->string('satker')->nullable();
             $table->string('class')->nullable();
