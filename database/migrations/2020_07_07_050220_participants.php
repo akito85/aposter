@@ -33,6 +33,7 @@ class Participants extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->string('work_email')->nullable();
             $table->string('work_address')->nullable();
             $table->string('work_phone')->nullable();
             $table->string('work_fax')->nullable();
