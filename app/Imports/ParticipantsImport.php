@@ -15,7 +15,7 @@ class ParticipantsImport implements ToCollection
     {
         $rows = $collection;
 
-        for($i = 6; $i <= count($rows) - 6; $i++) {
+        for($i = 6; $i <= count($rows) - 4; $i++) {
             if(!empty($rows[$i])) {
                 ParticipantsModel::updateOrCreate([
                     'nip' => $rows[$i][2],
