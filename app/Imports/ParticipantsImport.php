@@ -14,11 +14,8 @@ class ParticipantsImport implements ToCollection
     public function collection(Collection $collection)
     {
         $rows = $collection;
-        $i = 6;
 
-        do {
-            $i++;
-
+        for($i = 6; $i <= count($rows) - 6; $i++) {
             if(!empty($rows[$i])) {
                 ParticipantsModel::updateOrCreate([
                     'nip' => $rows[$i][2],
@@ -52,9 +49,11 @@ class ParticipantsImport implements ToCollection
                     'religion'=> $rows[$i][29],
                     'bracket' => $rows[$i][30]
                 ]);
-            } else {
+            }
+            else {
                 break;
             }
-        } while ($i >= 6);
+        }
+
     }
 }

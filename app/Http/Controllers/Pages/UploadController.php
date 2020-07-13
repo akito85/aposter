@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UploadRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\ParticipantsImport;
+use App\Imports\TrxTrainingsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UploadController extends Controller
@@ -52,7 +53,9 @@ class UploadController extends Controller
         $title = $idata[0][1][0];
         $ta = $idata[0][2][0];
 
-        //Excel::Import(new ParticipantsImport, $file);
+        Excel::Import(new ParticipantsImport, $file);
+
+        Excel::Import(new TrxTrainingsImport, $file);
 
         //return view('pages.upload');
     }
