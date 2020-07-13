@@ -11,8 +11,9 @@ class ParticipantsImport implements ToCollection
     /**
     * @param Collection $collection
     */
-    public function collection(Collection $rows)
+    public function collection(Collection $collection)
     {
+        $rows = $collection;
         $i = 6;
 
         do {
