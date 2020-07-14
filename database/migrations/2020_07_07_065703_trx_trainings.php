@@ -18,6 +18,7 @@ class TrxTrainings extends Migration
             $table->string('nip');
             $table->string('training_name')->nullable();
             $table->integer('training_year')->nullable();
+            $table->string('pass')->nullable();
             $table->timestamps();
         });
 
