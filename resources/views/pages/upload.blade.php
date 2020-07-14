@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     <div>{{ isset($success) ? $success : '' }}</div>
 
@@ -49,7 +49,17 @@
                         <th>Waktu Pengubahan</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @foreach ($logs as $log)
+                    <tr>
+                        <td>{{ $log->file_name }}</td>
+                        <td>{{ $log->training_name }}</td>
+                        <td>{{ $log->uploader_name }}</td>
+                        <td>{{ $log->created_at }}</td>
+                        <td>{{ $log->updated_at }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>

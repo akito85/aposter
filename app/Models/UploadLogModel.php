@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UploadLogModel extends Model
 {
-    protected $table = 'log_upload';
+    protected $table = 'upload_log';
     protected $fillable = [
         'file_name',
         'training_name',

@@ -7,6 +7,7 @@ use App\Http\Requests\UploadRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\ParticipantsImport;
 use App\Imports\TrxTrainingsImport;
+use App\Models\UploadLogModel;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UploadController extends Controller
@@ -57,6 +58,19 @@ class UploadController extends Controller
 
         Excel::Import(new TrxTrainingsImport, $file);
 
-        //return view('pages.upload');
+        UploadLogModel::create(
+            [
+                'file_name' => $fn,
+                'training_name' => $title . ' ' . $ta,
+                'uploader_name' => $email
+            ]
+        );
+
+        $logs = UploadLogModel::select('*')
+                    ->limit(11)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+        return view('pages.upload', ['logs' => $logs]);
     }
 }
