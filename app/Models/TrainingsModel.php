@@ -8,7 +8,8 @@ class TrainingsModel extends Model
 {
     protected $table = 'trainings';
     protected $fillable = [
-        'traning_name',
+        'org_id',
+        'training_name',
         'start_date',
         'end_date'
     ];
