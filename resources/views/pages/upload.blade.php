@@ -18,13 +18,13 @@
                     <form method="POST" action="{{ url('/fileUploadParticipants') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <input type="file" id="data" class="custom-file-input" name="data">
-                            <label class="custom-file-label" for="data" aria-describedby="file-label-data">Choose file</label>
+                            <input type="file" id="data_participants" class="custom-file-input" name="data_participants">
+                            <label class="custom-file-label" for="data_participants" aria-describedby="file-label-data">Choose file</label>
                         </div>
                         <br><br>
                         <div class="row">
                             <div class="mr-auto ml-auto">
-                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload</button>
+                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload Data Participants</button>
                             </div>
                         </div>
                     </form>
@@ -44,13 +44,13 @@
                     <form method="POST" action="{{ url('/fileUploadResults') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <input type="file" id="data" class="custom-file-input" name="data">
-                            <label class="custom-file-label" for="data" aria-describedby="file-label-data">Choose file</label>
+                            <input type="file" id="data_results" class="custom-file-input" name="data_results">
+                            <label class="custom-file-label" for="data_results" aria-describedby="file-label-data">Choose file</label>
                         </div>
                         <br><br>
                         <div class="row">
                             <div class="mr-auto ml-auto">
-                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload</button>
+                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload Data Results</button>
                             </div>
                         </div>
                     </form>
