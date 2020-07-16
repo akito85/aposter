@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadRequest extends FormRequest
+class UploadResultsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UploadRequest extends FormRequest
     {
         return [
             // file validation
-            'data'  => 'required|max:113664'
+            'data_results'  => 'required|max:113664'
         ];
     }
 
@@ -38,7 +38,7 @@ class UploadRequest extends FormRequest
     {
         return [
             // file validation
-            'data.required'  => 'Please input the file excel (xls/xlsx)'
+            'data_results.required'  => 'Please input the file excel (xls/xlsx)'
         ];
     }
 }
