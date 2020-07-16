@@ -4,32 +4,60 @@
 <div class="container-fluid">
 
     <div>{{ isset($success) ? $success : '' }}</div>
-
-    <div class="card shadow mb-4">
-        <!-- Card Header -->
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Upload file
-            </h6>
+    <div class="row">
+        <div class="col-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Upload file participants
+                    </h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form method="POST" action="{{ url('/fileUploadParticipants') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" id="data" class="custom-file-input" name="data">
+                            <label class="custom-file-label" for="data" aria-describedby="file-label-data">Choose file</label>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="mr-auto ml-auto">
+                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <!-- Card Body -->
-        <div class="card-body">
-            <form method="POST" action="{{ url('/fileUploadParticipants') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <input type="file" id="data" class="custom-file-input" name="data">
-                    <label class="custom-file-label" for="data" aria-describedby="file-label-data">Choose file</label>
+        <div class="col-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Upload file results
+                    </h6>
                 </div>
-                <br><br>
-                <div class="row">
-                    <div class="mr-auto ml-auto">
-                        <button type="submit" id="file-label-data" class="btn btn-primary">Upload</button>
-                    </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form method="POST" action="{{ url('/fileUploadResults') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" id="data" class="custom-file-input" name="data">
+                            <label class="custom-file-label" for="data" aria-describedby="file-label-data">Choose file</label>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="mr-auto ml-auto">
+                                <button type="submit" id="file-label-data" class="btn btn-primary">Upload</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-
     <div class="card shadow mb-4">
         <!-- Card Header -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
