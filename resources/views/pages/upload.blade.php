@@ -14,7 +14,7 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <form method="POST" action="{{ url('/fileUpload') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('/fileUploadParticipants') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <input type="file" id="data" class="custom-file-input" name="data">

@@ -29,10 +29,10 @@ class UploadController extends Controller
      */
     public function index()
     {
-        return view('pages.upload');
+        return view('pages.upload', ['logs' => $this->logUploadList()]);
     }
 
-    public function fileUpload(UploadRequest $request)
+    public function fileUploadParticipants(UploadRequest $request)
     {
         // get logged user
         $user = auth()->user();
@@ -66,11 +66,14 @@ class UploadController extends Controller
             ]
         );
 
-        $logs = UploadLogModel::select('*')
+        return view('pages.upload', ['logs' => $this->logUploadList()]);
+    }
+
+    private function logUploadList()
+    {
+        return UploadLogModel::select('*')
                     ->limit(11)
                     ->orderBy('created_at', 'desc')
                     ->get();
-
-        return view('pages.upload', ['logs' => $logs]);
     }
 }
