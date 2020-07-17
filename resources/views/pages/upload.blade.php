@@ -71,7 +71,7 @@
                 <thead>
                     <tr>
                         <th>Nama File</th>
-                        <th>Nama Diklat</th>
+                        <!-- <th>Nama Diklat</th> -->
                         <th>Pengunggah</th>
                         <th>Waktu Penambahan</th>
                         <th>Waktu Pengubahan</th>
@@ -81,7 +81,7 @@
                     @foreach ($logs as $log)
                     <tr>
                         <td>{{ $log->file_name }}</td>
-                        <td>{{ $log->training_name }}</td>
+                        <!-- <td>{{ $log->training_name }}</td> -->
                         <td>{{ $log->uploader_name }}</td>
                         <td>{{ $log->created_at }}</td>
                         <td>{{ $log->updated_at }}</td>
@@ -96,13 +96,22 @@
 
 @section('custom_js')
 <script>
-    let cf = document.getElementById("data");
-        cf.addEventListener("change", function(e) {
+    let dp = document.getElementById("data_participants");
+        dp.addEventListener("change", function(e) {
             let files = e.target.files;
             for (var i = 0; i < files.length; i++) {
                 let file = files[i];
-                cf.nextElementSibling.innerHTML = file.name;
+                dp.nextElementSibling.innerHTML = file.name;
             }
         });
+
+    let dr = document.getElementById("data_results");
+    dr.addEventListener("change", function(e) {
+        let files = e.target.files;
+        for (var i = 0; i < files.length; i++) {
+            let file = files[i];
+            dr.nextElementSibling.innerHTML = file.name;
+        }
+    });
 </script>
 @endsection

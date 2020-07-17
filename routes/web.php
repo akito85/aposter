@@ -18,6 +18,7 @@ Route::get('/', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');
 
-Route::post('/fileUploadParticipants', 'Pages\UploadController@fileUploadParticipants')->name('file-upload');
+Route::post('/fileUploadParticipants', 'Pages\UploadController@fileUploadParticipants')->name('file-participants');
+Route::post('/fileUploadResults', 'Pages\UploadController@fileUploadResults')->name('file-results');
 
 Route::get('/checkTrainings', 'SyncTrainingsController@index')->name('check-trainings');

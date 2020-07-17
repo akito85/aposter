@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Pages;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UploadParticipantsRequest;
-use App\Http\Requests\UploadReultsRequest;
+use App\Http\Requests\UploadResultsRequest;
 use App\Http\Controllers\Controller;
 use App\Imports\ParticipantsImport;
 use App\Imports\TrxTrainingsImport;
 use App\Models\UploadLogModel;
 use App\Helpers\CleanerHelper;
 use Maatwebsite\Excel\Facades\Excel;
+use PHPHtmlParser\Dom;
 
 class UploadController extends Controller
 {
@@ -24,7 +25,9 @@ class UploadController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->email = auth()->user()->email;
+
+        $user = auth()->user();
+        $this->email = 'akito.evol@gmail.com';
     }
 
     /**
@@ -51,14 +54,31 @@ class UploadController extends Controller
 
         $this->saveUploadLog($this->changeFileName('data_participants'), $title, $ta, $this->email);
 
-        return view('pages.upload', ['logs' => $this->logUploadList()]);
+        return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     public function fileUploadResults(UploadResultsRequest $request) {
+        $rawfile = $request->file('data_results');
+        $tempfile = fopen('temp/temp.txt', 'w') or die('Unable to open file!');
 
-        $this->saveUploadLog($this->changeFileName('data_requests'), '', '', $this->email);
+        $html = fopen($rawfile, 'r') or die('Unable to open file!');
 
-        return view('pages.upload', ['logs' => $this->listUploadLog()]);
+        fwrite($tempfile, fgets($html));
+        fclose($tempfile);
+
+        $cmd = 'python bin/synrs.py 2>&1';
+
+        try {
+            $exe = shell_exec($cmd);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        $json = json_decode($exe, true);
+
+        $this->saveUploadLog($this->changeFileName($rawfile), '', '', $this->email);
+
+        return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     private function listUploadLog()
@@ -69,7 +89,7 @@ class UploadController extends Controller
                     ->get();
     }
 
-    private function saveUploadLog($file, $training_name = '', $year = '', $email)
+    private function saveUploadLog($file, $title, $year, $email)
     {
         UploadLogModel::create(
             [
@@ -90,7 +110,6 @@ class UploadController extends Controller
             $ts
         )->format('d-m-Y_H.i.s');
 
-        $file = $request->file($file);
         $fn = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
         return $fn;
