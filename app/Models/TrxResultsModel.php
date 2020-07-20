@@ -20,6 +20,7 @@ class TrxResultsModel extends Model
         'cost_detail',
         'elearning',
         'type_test',
+        'class',
         'student_id',
         'name',
         'nip',

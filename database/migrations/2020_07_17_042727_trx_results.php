@@ -20,8 +20,8 @@ class TrxResults extends Migration
             $table->string('training_name')->nullable();
             $table->datetime('start')->nullable();
             $table->datetime('end')->nullable();
-            $table->string('hours')->nullable();
-            $table->string('days')->nullable();
+            $table->integer('hours')->nullable();
+            $table->integer('days')->nullable();
             $table->string('organization_name')->nullable();
             $table->string('type')->nullable();
             $table->string('cost')->nullable();
@@ -62,7 +62,7 @@ class TrxResults extends Migration
             $table->string('number')->nullable();
             $table->datetime('date')->nullable();
             $table->string('execution_value')->nullable();
-            $table->string('trainer_value')->nullable();
+            $table->string('trainer_value', 3333)->nullable();
 
             $table->timestamps();
         });
