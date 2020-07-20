@@ -17,17 +17,17 @@ class TrxResults extends Migration
             $table->id();
             // trainings
             $table->string('training_id')->nullable();
-            $table->string('name')->nullable();
+            $table->string('training_name')->nullable();
             $table->datetime('start')->nullable();
             $table->datetime('end')->nullable();
             $table->string('hours')->nullable();
             $table->string('days')->nullable();
-            $table->string('satker')->nullable();
+            $table->string('organization_name')->nullable();
             $table->string('type')->nullable();
             $table->string('cost')->nullable();
             $table->string('cost_detail')->nullable();
             $table->string('elearning')->nullable();
-            $table->string('test')->nullable();
+            $table->string('type_test')->nullable();
             $table->string('class')->nullable();
             // students
             $table->string('student_id')->nullable();
@@ -52,7 +52,7 @@ class TrxResults extends Migration
             $table->string('eselon3')->nullable();
             $table->string('eselon4')->nullable();
             $table->string('satker')->nullable();
-            $table->string('test')->nullable();
+            $table->string('test_result')->nullable();
             $table->string('graduate_status')->nullable();
             $table->string('activity')->nullable();
             $table->string('presence')->nullable();
