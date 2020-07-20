@@ -18,8 +18,8 @@ class TrxResults extends Migration
             // trainings
             $table->string('training_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('start')->nullable();
-            $table->string('end')->nullable();
+            $table->datetime('start')->nullable();
+            $table->datetime('end')->nullable();
             $table->string('hours')->nullable();
             $table->string('days')->nullable();
             $table->string('satker')->nullable();
@@ -36,7 +36,7 @@ class TrxResults extends Migration
             $table->string('nrp_nik')->nullable();
             $table->string('rank_class')->nullable();
             $table->string('born')->nullable();
-            $table->string('birthday')->nullable();
+            $table->datetime('birthday')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
@@ -60,7 +60,7 @@ class TrxResults extends Migration
             $table->string('post_test')->nullable();
             // certificate
             $table->string('number')->nullable();
-            $table->string('date')->nullable();
+            $table->datetime('date')->nullable();
             $table->string('execution_value')->nullable();
             $table->string('trainer_value')->nullable();
         });
