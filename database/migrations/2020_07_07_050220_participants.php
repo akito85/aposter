@@ -44,6 +44,10 @@ class Participants extends Migration
             $table->string('work_position_id')->nullable();
             $table->string('work_position')->nullable();
             $table->string('work_organisation')->nullable();
+            $table->string('main_unit')->nullable();
+            $table->string('eselon2')->nullable();
+            $table->string('eselon3')->nullable();
+            $table->string('eselon4')->nullable();
             $table->string('no_sk')->nullable();
             $table->string('tmt_sk')->nullable();
             $table->string('religion')->nullable();
