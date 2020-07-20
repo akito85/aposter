@@ -30,7 +30,7 @@ class TrxResults extends Migration
             $table->string('test')->nullable();
             $table->string('class')->nullable();
             // students
-            $table->string('id')->nullable();
+            $table->string('student_id')->nullable();
             $table->string('name')->nullable();
             $table->string('nip')->nullable();
             $table->string('nrp_nik')->nullable();
@@ -63,6 +63,8 @@ class TrxResults extends Migration
             $table->datetime('date')->nullable();
             $table->string('execution_value')->nullable();
             $table->string('trainer_value')->nullable();
+
+            $table->timestamps();
         });
     }
 
