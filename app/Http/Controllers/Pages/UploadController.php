@@ -120,8 +120,8 @@ class UploadController extends Controller
 
                 'student_id' => (is_object($cols->item(13)) ? $cols->item(13)->nodeValue : NULL),
                 'name' => (is_object($cols->item(14)) ? $cols->item(14)->nodeValue : NULL),
-                'nip' => (is_object($cols->item(15)) ? $cols->item(15)->nodeValue : NULL),
-                'nrp_nik' => (is_object($cols->item(16)) ? $cols->item(16)->nodeValue : NULL),
+                'nip' => (is_object($cols->item(15)) ? preg_replace('/~/', '', $cols->item(15)->nodeValue) : NULL),
+                'nrp_nik' => (is_object($cols->item(16)) ? preg_replace('/~/', '', $cols->item(16)->nodeValue) : NULL),
                 'rank_class' => (is_object($cols->item(17)) ? $cols->item(17)->nodeValue : NULL),
                 'born' => (is_object($cols->item(18)) ? $cols->item(18)->nodeValue : NULL),
                 'birthday' => (is_object($cols->item(19)) ? $cols->item(19)->nodeValue : NULL),
