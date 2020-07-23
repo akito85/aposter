@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'Pages\DashboardController@index')->name('dashboard');
-Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
+Route::get('/dashboard/{trName?}', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');
 
 Route::post('/fileUploadParticipants', 'Pages\UploadController@fileUploadParticipants')->name('file-participants');
