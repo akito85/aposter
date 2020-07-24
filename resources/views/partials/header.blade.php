@@ -12,8 +12,8 @@
 <script src="{{ asset('assets/vendors/paper/js/core/popper.min.js') }}" defer></script>
 <script src="{{ asset('assets/vendors/paper/js/plugins/chartjs.min.js') }}" defer></script>
 <script src="{{ asset('assets/vendors/paper/js/plugins/chartjs-plugin-datalabels.min.js') }}" defer></script>
+<script src="{{ asset('assets/vendors/paper/js/plugins/perfect-scrollbar.jquery.min.js') }}" defer></script>
 <script src="{{ asset('assets/vendors/paper/js/paper-dashboard.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/app.js') }}"></script>
 
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
