@@ -111,14 +111,24 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             "#ffe5d9",
             "#ffcad4",
             "#f4acb7",
-            "#eae2b7"
+            "#eae2b7",
+            "#ffb5a7",
+            "#fcd5ce",
+            "#f8edeb",
+            "#f9dcc4",
+            "#fec89a",
             ],
             borderColor: [
             "#d8e2dc",
             "#ffe5d9",
             "#ffcad4",
             "#f4acb7",
-            "#eae2b7"
+            "#eae2b7",
+            "#ffb5a7",
+            "#fcd5ce",
+            "#f8edeb",
+            "#f9dcc4",
+            "#fec89a",
             ]
         }
         ]
