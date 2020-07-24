@@ -83,11 +83,11 @@ class DashboardController extends Controller
         $tier5 = !empty($tier5) ? $tier5->count() : 0;
 
         $tier = [
-            'T1' => $tier1,
-            'T2' => $tier2,
-            'T3' => $tier3,
-            'T4' => $tier4,
-            'T5' => $tier5,
+            '1 - 20' => $tier1,
+            '21 - 30' => $tier2,
+            '31 - 40' => $tier3,
+            '41 - 50' => $tier4,
+            '51 - 60' => $tier5,
         ];
 
         return $tier;
