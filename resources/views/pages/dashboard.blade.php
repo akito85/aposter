@@ -89,384 +89,77 @@
 
 @section('custom_js')
 <script>
+function initiateChart(chartElement, chartType, chartTitle, chartData) {
+    // get the chart canvas
+    var cData = JSON.parse(chartData);
+    var ctx = document.getElementById(chartElement);
+    var labels = Object.getOwnPropertyNames(cData).sort();
+    var values = [];
+
+    for (let i = 0; i < labels.length; i++) {
+        values.push(cData[labels[i]]);
+    }
+
+    // chart data
+    var data = {
+        labels: labels,
+        datasets: [
+        {
+            data: values,
+            backgroundColor: [
+            "#d8e2dc",
+            "#ffe5d9",
+            "#ffcad4",
+            "#f4acb7",
+            "#eae2b7"
+            ],
+            borderColor: [
+            "#d8e2dc",
+            "#ffe5d9",
+            "#ffcad4",
+            "#f4acb7",
+            "#eae2b7"
+            ]
+        }
+        ]
+    };
+
+    //options
+    var options = {
+          responsive: true,
+          title: {
+          display: true,
+          position: "top",
+          text: chartTitle,
+          fontSize: 17,
+          fontColor: "#111"
+        },
+        legend: {
+          display: false,
+        },
+        plugins: {
+          datalabels: {
+              anchor: "center",
+              clamp: true
+          }
+        }
+    };
+
+    // create Pie Chart class object
+    var chart = new Chart(ctx, {
+        type: chartType,
+        plugins: [ChartDataLabels],
+        data: data,
+        options: options
+    });
+  }
   $(function(){
-    /** can be refactored and simplified **/
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $gender; ?>`);
-      var ctx = $("#chart-gender");
-
-      // chart data
-      var data = {
-        labels: ["PRIA", "WANITA"],
-        datasets: [
-          {
-            label: "Data Jenis Kelamain",
-            data: [cData.PRIA, cData.WANITA],
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_gender = new Chart(ctx, {
-        type: "bar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $age; ?>`);
-      var ctx = $("#chart-age");
-
-      // chart data
-      var data = {
-        labels: ['1 - 20', '21 - 30', '31 - 40', '41 - 50', '51 - 60'],
-        datasets: [
-          {
-            label: "Umur Peserta",
-            data: [cData.T1, cData.T2, cData.T3, cData.T4, cData.T5],
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_age = new Chart(ctx, {
-        type: "bar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $rc; ?>`);
-      var ctx = $("#chart-rc");
-
-      var labels = Object.getOwnPropertyNames(cData).sort();
-      var values = [];
-
-      for (let i = 0; i < labels.length; i++) {
-        values.push(cData[labels[i]]);
-      }
-
-      // chart data
-      var data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Pangkat / Golongan Peserta",
-            data: values,
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_rc = new Chart(ctx, {
-        type: "horizontalBar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $education; ?>`);
-      var ctx = $("#chart-education");
-
-      var labels = Object.getOwnPropertyNames(cData).sort();
-      var values = [];
-
-      for (let i = 0; i < labels.length; i++) {
-        values.push(cData[labels[i]]);
-      }
-
-      // chart data
-      var data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Pendidikan",
-            data: values,
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_education = new Chart(ctx, {
-        type: "bar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $echelon; ?>`);
-      var ctx = $("#chart-echelon");
-
-      var labels = Object.getOwnPropertyNames(cData).sort();
-      var values = [];
-
-      for (let i = 0; i < labels.length; i++) {
-        values.push(cData[labels[i]]);
-      }
-
-      // chart data
-      var data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Eselon dan non-eselon",
-            data: values,
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_echelon = new Chart(ctx, {
-        type: "horizontalBar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
-
-      // get the chart canvas
-      var cData = JSON.parse(`<?php echo $pass; ?>`);
-      var ctx = $("#chart-pass");
-
-      var labels = Object.getOwnPropertyNames(cData).sort();
-      var values = [];
-
-      for (let i = 0; i < labels.length; i++) {
-        values.push(cData[labels[i]]);
-      }
-
-      // chart data
-      var data = {
-        labels: labels,
-        datasets: [
-          {
-            label: "Kelulusan",
-            data: values,
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-            ],
-            borderWidth: [1, 1]
-          }
-        ]
-      };
-
-      //options
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-          text: "{{ $training }}",
-          fontSize: 17,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        },
-        plugins: {
-          datalabels: {
-            anchor: "center",
-            clamp: true
-          }
-        }
-      };
-
-      // create Pie Chart class object
-      var chart_pass = new Chart(ctx, {
-        type: "horizontalBar",
-        plugins: [ChartDataLabels],
-        data: data,
-        options: options
-      });
+    initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
+    initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
+    initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
+    initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);
+    initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`);
+    initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`);
   });
 </script>
 @endsection
