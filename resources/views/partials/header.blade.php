@@ -13,6 +13,7 @@
 <script src="{{ asset('assets/vendors/paper/js/plugins/chartjs.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/paper/js/plugins/chartjs-plugin-datalabels.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/paper/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/select2/js/select2.min.js') }}"></script>
 
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,5 +21,6 @@
 
 <!-- Styles -->
 <link href="{{ asset('assets/vendors/paper/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/vendors/select2/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/vendors/paper/css/paper-dashboard.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
