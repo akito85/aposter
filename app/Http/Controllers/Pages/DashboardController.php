@@ -28,15 +28,15 @@ class DashboardController extends Controller
         $age = $this->getAggregateAge($trName);
         $echelon = $this->getAggregateEchelon($trName);
         $gender = $this->omniCount(
-                    $this->omniQuery('gender', 'training_name', 'nip', 'like', $trName), 'gender');
+                    $this->omniQuery('gender', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'gender');
         $rankClass = $this->omniCount(
-                        $this->omniQuery('rank_class', 'training_name', 'nip', 'like', $trName), 'rank_class');
+                        $this->omniQuery('rank_class', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'rank_class');
         $education = $this->omniCount(
-                        $this->omniQuery('education', 'training_name', 'nip', 'like', $trName), 'education');
+                        $this->omniQuery('education', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'education');
         $pass = $this->omniCount(
-            $this->omniQuery('graduate_status', 'training_name', 'nip', 'like', $trName), 'graduate_status');
+            $this->omniQuery('graduate_status', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'graduate_status');
 
-        $training = $this->omniQuery('training_name', 'training_name', 'training_name', 'like', $trName);
+        $training = $this->omniQuery('training_name', 'training_name', 'training_name', 'like');
 
         $data = [
             'training' => $trName,
@@ -46,7 +46,7 @@ class DashboardController extends Controller
             'education' => json_encode($education),
             'echelon' => json_encode($echelon),
             'pass' => json_encode($pass),
-            'training' => json_encode($training)
+            'trainingList' => $training
         ];
 
         return view('pages.dashboard', $data);
@@ -55,7 +55,7 @@ class DashboardController extends Controller
     private function getAggregateAge($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('birthday', 'training_name', 'nip', 'like', $trName);
+        $query = $this->omniQuery('birthday', 'training_name', 'nip', 'like', '%'. $trName . '%');
 
         $now = time();
 
@@ -99,7 +99,7 @@ class DashboardController extends Controller
     private function getAggregateEchelon($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('position_desc', 'training_name', 'nip', 'like', $trName);
+        $query = $this->omniQuery('position_desc', 'training_name', 'nip', 'like', '%'. $trName . '%');
 
         // group echelon
         foreach($query as $row) {
@@ -153,13 +153,16 @@ class DashboardController extends Controller
         } else {
             $c['Pelaksana'] = 0;
         }
-
-        $c['Fungsional'] = collect($e['Fungsional'])->count();
+        if(!empty($e['Fungsional'])) {
+            $c['Fungsional'] = collect($e['Fungsional'])->count();
+        } else {
+            $c['Fungsional'] = 0;
+        }
 
         return $c;
     }
 
-    private function omniQuery($selectField, $whereField, $distinctField = NULL, $queryOperator, $queryString)
+    private function omniQuery($selectField, $whereField, $distinctField = NULL, $queryOperator, $queryString = NULL)
     {
         // resulting row of objects
         if(!empty($queryString)) {
@@ -174,9 +177,14 @@ class DashboardController extends Controller
                             ->get();
             }
         } else {
-            $query = TrxResultsModel::select($selectField, $distinctField)
-                        //->distinct($distinctField)
-                        ->get();
+            if(empty($distinctField)) {
+                $query = TrxResultsModel::select($selectField, $distinctField)
+                            ->get();
+            } else {
+                $query = TrxResultsModel::select($selectField, $distinctField)
+                            ->distinct($distinctField)
+                            ->get();
+            }
         }
 
         return $query;
