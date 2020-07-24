@@ -36,6 +36,8 @@ class DashboardController extends Controller
         $pass = $this->omniCount(
             $this->omniQuery('graduate_status', 'training_name', 'nip', 'like', $trName), 'graduate_status');
 
+        $training = $this->omniQuery('training_name', 'training_name', 'training_name', 'like', $trName);
+
         $data = [
             'training' => $trName,
             'gender' => json_encode($gender),
@@ -43,7 +45,8 @@ class DashboardController extends Controller
             'rc' => json_encode($rankClass),
             'education' => json_encode($education),
             'echelon' => json_encode($echelon),
-            'pass' => json_encode($pass)
+            'pass' => json_encode($pass),
+            'training' => json_encode($training)
         ];
 
         return view('pages.dashboard', $data);
@@ -160,9 +163,16 @@ class DashboardController extends Controller
     {
         // resulting row of objects
         if(!empty($queryString)) {
-            $query = TrxResultsModel::select($selectField)
-                        ->where($whereField, $queryOperator, $queryString)
-                        ->get();
+            if(empty($distinctField)) {
+                $query = TrxResultsModel::select($selectField)
+                            ->where($whereField, $queryOperator, $queryString)
+                            ->get();
+            } else {
+                $query = TrxResultsModel::select($selectField)
+                            ->where($whereField, $queryOperator, $queryString)
+                            ->distinct($distinctField)
+                            ->get();
+            }
         } else {
             $query = TrxResultsModel::select($selectField, $distinctField)
                         //->distinct($distinctField)
