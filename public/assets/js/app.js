@@ -93,8 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.jQuery = $;
-window.$ = $;
+
 
 /***/ }),
 
