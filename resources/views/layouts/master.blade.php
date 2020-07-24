@@ -15,6 +15,7 @@
         @yield('content')
         @endif
 
+        <script src="{{ asset('assets/vendors/paper/js/paper-dashboard.min.js') }}"></script>
         @yield('custom_js')
     </body>
 </html>
