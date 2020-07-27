@@ -61,6 +61,7 @@ class DashboardController extends Controller
 
         foreach ($query as $row) {
             $age = date('Y', $now) - date('Y', strtotime($row->birthday));
+
             if($age <= 20) {
                 $ages['l1'][] = $age;
             } elseif ($age >= 21 and $age <= 30) {
@@ -71,19 +72,18 @@ class DashboardController extends Controller
                 $ages['l4'][] = $age;
             } elseif ($age >= 51 and $age <= 60) {
                 $ages['l5'][] = $age;
+            } else {
+                $ages['l6'][] = $age;
             }
         }
 
-        $tier1 = !empty($ages['l1']) ? collect($ages['l1']) : 0;
-        $tier1 = !empty($tier1) ? $tier1->count() : 0;
-        $tier2 = !empty($ages['l2']) ? collect($ages['l2']) : 0;
-        $tier2 = !empty($tier2) ? $tier2->count() : 0;
-        $tier3 = !empty($ages['l3']) ? collect($ages['l3']) : 0;
-        $tier3 = !empty($tier3) ? $tier3->count() : 0;
-        $tier4 = !empty($ages['l4']) ? collect($ages['l4']) : 0;
-        $tier4 = !empty($tier4) ? $tier4->count() : 0;
-        $tier5 = !empty($ages['l5']) ? collect($ages['l5']) : 0;
-        $tier5 = !empty($tier5) ? $tier5->count() : 0;
+        $tier1 = !empty($ages['l1']) ? collect($ages['l1'])->count() : 0;
+        $tier2 = !empty($ages['l2']) ? collect($ages['l2'])->count() : 0;
+        $tier3 = !empty($ages['l3']) ? collect($ages['l3'])->count() : 0;
+        $tier4 = !empty($ages['l4']) ? collect($ages['l4'])->count() : 0;
+        $tier5 = !empty($ages['l5']) ? collect($ages['l5'])->count() : 0;
+        $tier6 = !empty($ages['l6']) ? collect($ages['l6'])->count() : 0;
+
 
         $tier = [
             '1 - 20' => $tier1,
@@ -91,6 +91,7 @@ class DashboardController extends Controller
             '31 - 40' => $tier3,
             '41 - 50' => $tier4,
             '51 - 60' => $tier5,
+            'lainnya' => $tier6
         ];
 
         return $tier;
@@ -101,16 +102,16 @@ class DashboardController extends Controller
         // resulting row of objects
         $query = $this->omniQuery('position_desc', 'training_name', 'nip', 'like', '%'. $trName . '%');
 
+        // pattern echelons
+        $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
+        $p2 = '/kepala wilayah|kepala pusat/i';
+        $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
+        $p4 = '/kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
+        $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
+
         // group echelon
         foreach($query as $row) {
             $position = $row->position_desc;
-
-            // pattern echelons
-            $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
-            $p2 = '/kepala wilayah|kepala pusat/i';
-            $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
-            $p4 = '/kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
-            $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
 
             if(preg_match($p1, $position)) {
                 $e['Eselon I'][] = $position;
@@ -128,36 +129,12 @@ class DashboardController extends Controller
         }
 
         // count array
-        if(!empty($e['Eselon I'])) {
-            $c['Eselon I'] = collect($e['Eselon I'])->count();
-        } else {
-            $c['Eselon I'] = 0;
-        }
-        if(!empty($e['Eselon II'])) {
-            $c['Eselon II'] = collect($e['Eselon II'])->count();
-        } else {
-            $c['Eselon II'] = 0;
-        }
-        if(!empty($e['Eselon III'])) {
-            $c['Eselon III'] = collect($e['Eselon III'])->count();
-        } else {
-            $c['Eselon III'] = 0;
-        }
-        if(!empty($e['Eselon IV'])) {
-            $c['Eselon IV'] = collect($e['Eselon IV'])->count();
-        } else {
-            $c['Eselon IV'] = 0;
-        }
-        if(!empty($e['Pelaksana'])) {
-            $c['Pelaksana'] = collect($e['Pelaksana'])->count();
-        } else {
-            $c['Pelaksana'] = 0;
-        }
-        if(!empty($e['Fungsional'])) {
-            $c['Fungsional'] = collect($e['Fungsional'])->count();
-        } else {
-            $c['Fungsional'] = 0;
-        }
+        $c['Eselon I'] = !empty($e['Eselon I']) ? collect($e['Eselon I'])->count() : 0;
+        $c['Eselon II'] = !empty($e['Eselon II']) ? collect($e['Eselon II'])->count() : 0;
+        $c['Eselon III'] = !empty($e['Eselon III']) ? collect($e['Eselon III'])->count() : 0;
+        $c['Eselon IV'] = !empty($e['Eselon IV']) ? collect($e['Eselon IV'])->count() : 0;
+        $c['Pelaksana'] = !empty($e['Pelaksana']) ? collect($e['Pelaksana'])->count() : 0;
+        $c['Fungsional'] = !empty($e['Fungsional']) ? collect($e['Fungsional'])->count() : 0;
 
         return $c;
     }
