@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.header')
+        @yield('custom_css')
     </head>
     <body>
         @if (Auth::check())

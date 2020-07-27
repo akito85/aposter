@@ -1,5 +1,19 @@
 @extends('layouts.master')
 
+@section('custom_css')
+<style>
+    .chart-gender, .data-gender,
+    .chart-age, .data-age,
+    .chart-rc, .data-rc,
+    .chart-education, .data-education,
+    .chart-echelon, .data-echelon,
+    .chart-pass, .data-pass
+    {
+        color: #ffffff !important;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
