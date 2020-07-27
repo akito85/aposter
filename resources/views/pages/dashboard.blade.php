@@ -29,39 +29,27 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-gender"></canvas>
+                    <a class="btn btn-primary chart-gender">Unduh Diagram</a>
+                    <a class="btn btn-primary data-gender">Lihat Data</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-age"></canvas>
+                    <a class="btn btn-primary chart-age">Unduh Diagram</a>
+                    <a class="btn btn-primary data-age">Lihat Data</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-rc"></canvas>
+                    <a class="btn btn-primary chart-rc">Unduh Diagram</a>
+                    <a class="btn btn-primary data-rc">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -70,39 +58,27 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-education"></canvas>
+                    <a class="btn btn-primary chart-education">Unduh Diagram</a>
+                    <a class="btn btn-primary data-education">Lihat Data</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-echelon"></canvas>
+                    <a class="btn btn-primary chart-echelon">Unduh Diagram</a>
+                    <a class="btn btn-primary data-echelon">Lihat Data</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <canvas id="chart-pass"></canvas>
+                    <a class="btn btn-primary chart-pass">Unduh Diagram</a>
+                    <a class="btn btn-primary data-pass">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -127,13 +103,15 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
     var data = {
         labels: labels,
         datasets: [
-        {
-            data: values,
-            backgroundColor: [
-                "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
-                "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
-            ]
-        }
+            {
+                data: values,
+                backgroundColor: [
+                    "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
+                    "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
+                    // "#03071e", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02",
+                    // "#e85d04", "#f48c06", "#f48c06", "#faa307", "#ffba08"
+                ]
+            }
         ]
     };
 
@@ -154,6 +132,12 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             datalabels: {
                 anchor: "center",
                 clamp: true
+            }
+        },
+        animation: {
+            onComplete: function(animation) {
+                ctx.nextElementSibling.setAttribute("download", "{{ $training }}" + " - " + chartTitle);
+                ctx.nextElementSibling.setAttribute("href", this.toBase64Image());
             }
         }
     };
