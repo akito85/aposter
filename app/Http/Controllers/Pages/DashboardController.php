@@ -35,8 +35,9 @@ class DashboardController extends Controller
                         $this->omniQuery('education', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'education');
         $pass = $this->omniCount(
             $this->omniQuery('graduate_status', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'graduate_status');
-
         $training = $this->omniQuery('training_name', 'training_name', 'training_name', 'like');
+        $organizations = $this->omniCount($this->omniQuery('organization_name','','organization_name','',''),'organization_name');
+
 
         $data = [
             'training' => $trName,
@@ -46,7 +47,8 @@ class DashboardController extends Controller
             'education' => json_encode($education),
             'echelon' => json_encode($echelon),
             'pass' => json_encode($pass),
-            'trainingList' => $training
+            'trainingList' => $training,
+            'organizations' => $organizations
         ];
 
         return view('pages.dashboard', $data);
@@ -139,7 +141,7 @@ class DashboardController extends Controller
         return $c;
     }
 
-    private function omniQuery($selectField, $whereField, $distinctField = NULL, $queryOperator, $queryString = NULL)
+    private function omniQuery($selectField, $whereField = NULL, $distinctField = NULL, $queryOperator = NULL, $queryString = NULL)
     {
         // resulting row of objects
         if(!empty($queryString)) {

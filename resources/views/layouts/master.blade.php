@@ -2,7 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.header')
-        @yield('custom_css')
+        <style>
+            @yield('custom_css')
+            .main-panel > .content { margin-top: 0; }
+        </style>
     </head>
     <body>
         @if (Auth::check())

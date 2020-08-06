@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('custom_css')
-<style>
     .chart-gender, .data-gender,
     .chart-age, .data-age,
     .chart-rc, .data-rc,
@@ -11,14 +10,41 @@
     {
         color: #ffffff !important;
     }
-</style>
 @endsection
 
 @section('content')
-<div class="container">
+<br>
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Penyelenggara Pelatihan</th>
+                                <th>Total Pelatihan</th>
+                            </thead>
+                            <tbody>
+                            @foreach($organizations as $k => $v)
+                                <tr>
+                                    <td>{{ $k }}</td><td>{{ $v }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-lg-6 col-xs-12">
+            <h4 class="justify-content-center">{{ $training }}</h4>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            <div class="card mt-3 mb-1">
                 <div class="card-body">
                     <select class="training-list form-control form-control-lg">
                         <option>ALL</option>
@@ -34,10 +60,6 @@
             </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container-fluid">
-    <h4 class="justify-content-center">{{ $training }}</h4>
     <hr>
     <div class="row justify-content-center">
         <div class="col-lg-4 col-md-12 col-sm-12">
