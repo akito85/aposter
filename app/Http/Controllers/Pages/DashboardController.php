@@ -171,7 +171,7 @@ class DashboardController extends Controller
 
     private function omniCount($queryResult = NULL, $selectField)
     {
-        $data = NULL;
+        $data = [];
 
         if(!empty($queryResult)) {
             foreach ($queryResult as $row) {
