@@ -176,11 +176,13 @@ class DashboardController extends Controller
                 $data[] = $row->$selectField;
             }
 
-            $collection = collect($data);
+            if(!empty(array_filter($data))) {
+                $collection = collect($data);
 
-            $counted = $collection->countBy();
+                $counted = $collection->countBy();
 
-            return $counted->all();
+                return $counted->all();
+            }
         }
 
         return false;
