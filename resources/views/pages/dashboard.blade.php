@@ -26,11 +26,13 @@
                                 <th>Total Pelatihan</th>
                             </thead>
                             <tbody>
-                            @foreach($organizations as $k => $v)
-                                <tr>
-                                    <td>{{ $k }}</td><td>{{ $v }}</td>
-                                </tr>
-                            @endforeach
+                            @if($organizations)
+                                @foreach($organizations as $k => $v)
+                                    <tr>
+                                        <td>{{ $k }}</td><td>{{ $v }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -48,13 +50,15 @@
                 <div class="card-body">
                     <select class="training-list form-control form-control-lg">
                         <option>ALL</option>
-                    @foreach ($trainingList as $tl)
-                        @if (trim($tl->training_name) == $training)
-                        <option selected>{{ trim($tl->training_name) }}</option>
-                        @else
-                        <option>{{ trim($tl->training_name) }}</option>
-                        @endif
-                    @endforeach
+                    @if($trainingList)
+                        @foreach ($trainingList as $tl)
+                            @if (trim($tl->training_name) == $training)
+                            <option selected>{{ trim($tl->training_name) }}</option>
+                            @else
+                            <option>{{ trim($tl->training_name) }}</option>
+                            @endif
+                        @endforeach
+                    @endif
                     </select>
                 </div>
             </div>
