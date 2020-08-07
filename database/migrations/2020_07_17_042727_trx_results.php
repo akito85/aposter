@@ -20,8 +20,8 @@ class TrxResults extends Migration
             $table->string('training_name')->nullable();
             $table->datetime('start')->nullable();
             $table->datetime('end')->nullable();
-            $table->integer('hours')->nullable();
-            $table->integer('days')->nullable();
+            $table->float('hours', 9, 3)->nullable();
+            $table->float('days', 9, 3)->nullable();
             $table->string('organization_name')->nullable();
             $table->string('type')->nullable();
             $table->string('cost')->nullable();
