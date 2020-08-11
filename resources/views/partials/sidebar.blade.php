@@ -38,14 +38,14 @@
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="{{ route('logout') }}"
+                <a class="dropdown-item" href="{{ secure_url('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                     <i class="nc-icon nc-user-run"></i>
                     <p>{{ __('Logout') }}</p>
                 </a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ secure_url('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </li>
