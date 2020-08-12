@@ -27,16 +27,35 @@ class DashboardController extends Controller
     {
         $age = $this->getAggregateAge($trName);
         $echelon = $this->getAggregateEchelon($trName);
-        $gender = $this->omniCount(
-                    $this->omniQuery('gender', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'gender');
-        $rankClass = $this->omniCount(
-                        $this->omniQuery('rank_class', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'rank_class');
-        $education = $this->omniCount(
-                        $this->omniQuery('education', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'education');
-        $pass = $this->omniCount(
-            $this->omniQuery('graduate_status', 'training_name', 'nip', 'like', '%'. $trName . '%'), 'graduate_status');
-        $training = $this->omniQuery('training_name', 'training_name', 'training_name', 'like');
-        $organizations = $this->omniCount($this->omniQuery('organization_name','','organization_name','',''),'organization_name');
+        $gender = $this->omniCount($this->omniQuery('gender',
+                                                    'training_name',
+                                                    'nip',
+                                                    'like',
+                                                    '%'. $trName . '%'), 'gender');
+        $rankClass = $this->omniCount($this->omniQuery('rank_class',
+                                                        'training_name',
+                                                        'nip',
+                                                        'like',
+                                                        '%'. $trName . '%'), 'rank_class');
+        $education = $this->omniCount($this->omniQuery('education',
+                                                        'training_name',
+                                                        'nip',
+                                                        'like',
+                                                        '%'. $trName . '%'), 'education');
+        $pass = $this->omniCount($this->omniQuery('graduate_status',
+                                                    'training_name',
+                                                    'nip',
+                                                    'like',
+                                                    '%'. $trName . '%'), 'graduate_status');
+        $training = $this->omniQuery('training_name',
+                                    'training_name',
+                                    'training_name',
+                                    'like');
+        $organizations = $this->omniCount($this->omniQuery('organization_name',
+                                                            '',
+                                                            'organization_name',
+                                                            '',
+                                                            ''),'organization_name');
 
 
         $data = [
