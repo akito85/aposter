@@ -113,6 +113,23 @@ class UploadController extends Controller
                 $date = now();
             }
 
+            if (is_object($cols->item(19))) {
+                if(!empty($cols->item(19)->nodeValue)) {
+                    $bdate = $cols->item(19)->nodeValue;
+                } else {
+                    $bdate = now();
+                }
+            }
+            if(empty($date)) {
+                $bdate = now();
+            }
+            if($date == '-') {
+                $bdate = now();
+            }
+            if($date == '') {
+                $bdate = now();
+            }
+
             $data = [
                 'training_id' => (is_object($cols->item(0)) ? $cols->item(0)->nodeValue : NULL),
                 'training_name' => (is_object($cols->item(1)) ? $cols->item(1)->nodeValue : NULL),
@@ -134,7 +151,7 @@ class UploadController extends Controller
                 'nrp_nik' => (is_object($cols->item(16)) ? preg_replace('/~/', '', $cols->item(16)->nodeValue) : NULL),
                 'rank_class' => (is_object($cols->item(17)) ? $cols->item(17)->nodeValue : NULL),
                 'born' => (is_object($cols->item(18)) ? $cols->item(18)->nodeValue : NULL),
-                'birthday' => (is_object($cols->item(19)) ? $cols->item(19)->nodeValue : now()),
+                'birthday' => $bdate,
                 'gender' => (is_object($cols->item(20)) ? $cols->item(20)->nodeValue : NULL),
                 'phone' => (is_object($cols->item(21)) ? $cols->item(21)->nodeValue : NULL),
                 'email' => (is_object($cols->item(22)) ? $cols->item(22)->nodeValue : NULL),
