@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import urllib3
 import time
 import locale
-import smtplib, ssl
+import smtplib, ssl, certifi
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -32,7 +32,10 @@ def send_notification(sender, receiver, subject, html):
 
 # Get the url
 url = f'https://bppk.kemenkeu.go.id/content/pengumuman?page=0&size=41'
-req = urllib3.PoolManager()
+req = urllib3.PoolManager(
+        cert_reqs='CERT_REQUIRED',
+        ca_certs=certifi.where()
+    )
 res = req.request('GET', url)
 raw = BeautifulSoup(res.data, 'lxml')
 
