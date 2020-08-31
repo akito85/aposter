@@ -106,6 +106,9 @@ class UploadController extends Controller
             if(empty($date)) {
                 $date = NULL;
             }
+            if($date == '-') {
+                $date = NULL;
+            }
 
             $data = [
                 'training_id' => (is_object($cols->item(0)) ? $cols->item(0)->nodeValue : NULL),
