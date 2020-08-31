@@ -99,18 +99,18 @@ class UploadController extends Controller
                 if(!empty($cols->item(42)->nodeValue)) {
                     $date = $cols->item(42)->nodeValue;
                 } else {
-                    $date = 'NOW()';
+                    $date = datetime.now();
                 }
             }
 
             if(empty($date)) {
-                $date = 'NOW()';
+                $date = datetime.now();
             }
             if($date == '-') {
-                $date = 'NOW()';
+                $date = datetime.now();
             }
             if($date == '') {
-                $date = 'NOW()';
+                $date = datetime.now();
             }
 
             $data = [
