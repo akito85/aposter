@@ -42,7 +42,7 @@ rows = raw.find_all('div', {'class': 'flex-card is-post light-bordered'})
 # Check the date for today and set the locale to Indonesian
 locale.setlocale(locale.LC_TIME, 'id_ID')
 today = time.strftime('%A, %d %B %Y')
-today = 'Kamis, 27 Agustus 2020'
+# today = 'Kamis, 27 Agustus 2020'
 
 # Filter for Pusdiklat DJKN only
 data = []
