@@ -94,7 +94,7 @@ class UploadController extends Controller
             $cols = $row->getElementsByTagName('td');
 
             // Fix weird case where date field is empty string...
-            $date = NULL; // default
+            $date = now(); // default
             if (is_object($cols->item(42))) {
                 if(!empty($cols->item(42)->nodeValue)) {
                     $date = $cols->item(42)->nodeValue;
@@ -113,6 +113,7 @@ class UploadController extends Controller
                 $date = now();
             }
 
+            $bdate = now(); // default
             if (is_object($cols->item(19))) {
                 if(!empty($cols->item(19)->nodeValue)) {
                     $bdate = $cols->item(19)->nodeValue;
