@@ -13,7 +13,6 @@ def send_notification(sender, receiver, subject, html):
     message['Subject'] = subject
     message['From'] = sender
     message['To'] = receiver
-    message['Cc'] = 'murniaty.lv@gmail.com '
     password = 'f33lfine-0x80'
 
     html =  html
@@ -64,6 +63,12 @@ for i in data:
 send_notification(
         'fonfon.1337@gmail.com',
         'murniaty86@kemenkeu.go.id',
+        'Pengumuman BPPK: Pusdiklat KNPK ' + today,
+        html
+    )
+send_notification(
+        'fonfon.1337@gmail.com',
+        'murniaty.lv@gmail.com',
         'Pengumuman BPPK: Pusdiklat KNPK ' + today,
         html
     )
