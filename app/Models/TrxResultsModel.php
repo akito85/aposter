@@ -32,6 +32,7 @@ class TrxResultsModel extends Model
         'phone',
         'email',
         'office_address',
+        'office_phone',
         'education',
         'education_desc',
         'position',
@@ -51,6 +52,7 @@ class TrxResultsModel extends Model
         'post_test',
         'number',
         'date',
+        'link',
         'execution_value',
         'trainer_value'
     ];
