@@ -15,8 +15,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "maatwebsite/excel": "^3.1",
-        "paquettg/php-html-parser": "^2.2"
+        "league/csv": "^9.6"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
