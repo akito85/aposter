@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Pages;
 
 use Illuminate\Http\Request;
-use League\Csv\Reader;
+use Illuminate\Support\Facades\DB;
+// use League\Csv\Reader;
 use App\Http\Requests\UploadParticipantsRequest;
 use App\Http\Requests\UploadResultsRequest;
 use App\Http\Controllers\Controller;
@@ -47,69 +48,77 @@ class UploadController extends Controller
         return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
-    public function fileUploadResults(UploadResultsRequest $request) {
-        $c = New CleanerHelper();
-
+    public function fileUploadResults(UploadResultsRequest $request)
+    {
         $rawfile = $request->file('data_results');
         // Create a CSV reader instance
-        $reader = Reader::createFromFileObject($rawfile->openFile());
-        $records = $reader->getRecords();
+        // $reader = Reader::createFromFileObject($rawfile->openFile());
+        // $reader = Reader::createFromPath($rawfile->getRealPath(), 'r');
+        // fopen($rawfile, 'r') or die('Unable to open file!');
+        // $reader->setOutputBOM(Reader::BOM_UTF8);
+        // $reader->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
+        // $records = $reader->getRecords();
 
-        foreach ($records as $offset => $record) {
+        $records = $this->csvToArray($rawfile);
+        $row = [];
+
+        // print_r($record[0]); die();
+
+        foreach($records as $record) {
             $row = [
-                'training_id' => $record[0],
-                'training_name' => $record[1],
-                'start' => $record[2],
-                'end' => $record[3],
-                'hours' => $record[4],
-                'days' => $record[5],
-                'organization_name' => $record[6],
-                'type' => $record[7],
-                'cost' => $record[8],
-                'cost_detail' => $record[9],
-                'elearning' => $record[10],
-                'type_test' => $record[11],
-                'class' => $record[12],
-                'student_id' => $record[13],
-                'name' => $record[14],
-                'nip' => $c->removeWhiteSpace(ltrim($record[15], "~")),
-                'nrp_nik' => $c->removeWhiteSpace(ltrim($record[16], "~")),
-                'rank_class' => $record[17],
-                'born' => $record[18],
-                'birthday' => $record[19],
-                'gender' => $record[20],
-                'phone' => $record[21],
-                'email' => $record[22],
-                'office_address' => $record[23],
-                'office_phone' => $record[24],
-                'education' => $record[25],
-                'education_desc' => $record[26],
-                'position' => $record[27],
-                'position_desc' => $record[28],
-                'married' => $record[29],
-                'religion' => $record[30],
-                'main_unit' => $record[31],
-                'eselon2' => $record[32],
-                'eselon3' => $record[33],
-                'eselon4' => $record[34],
-                'satker' => $record[35],
-                'test_result' => $record[36],
-                'graduate_status' => $record[37],
-                'activity' => $record[38],
-                'presence' => $record[39],
-                'pre_test' => $record[40],
-                'post_test' => $record[41],
-                'number' => $record[42],
-                'date' => $record[43],
-                //'link' => $record[44],
-                'execution_value' => $record[45],
-                'trainer_value' => $record[46]
+                'trx_id' => $this->UTF8Conf($record[0]),
+                'trx_name' => $this->UTF8Conf($record[1]),
+                'trx_start_date' => $this->UTF8Conf($record[2]),
+                'trx_end_date' => $this->UTF8Conf($record[3]),
+                'trx_hours' => $this->UTF8Conf($record[4]),
+                'trx_days' => $this->UTF8Conf($record[5]),
+                'organization_name' => $this->UTF8Conf($record[6]),
+                'trx_type' => $this->UTF8Conf($record[7]),
+                'trx_cost' => $this->UTF8Conf($record[8]),
+                'trx_cost_detail' => $this->UTF8Conf($record[9]),
+                'elearning' => $this->UTF8Conf($record[10]),
+                'type_test' => $this->UTF8Conf($record[11]),
+                'stx_class' => $this->UTF8Conf($record[12]),
+                'stx_id' => $this->UTF8Conf($record[13]),
+                'stx_name' => $this->UTF8Conf($record[14]),
+                'nip' => $this->UTF8Conf(ltrim($record[15], "~")),
+                'nrp_nik' => $this->UTF8Conf(ltrim($record[16], "~")),
+                'rank_class' => $this->UTF8Conf($record[17]),
+                'born' => $this->UTF8Conf($record[18]),
+                'birthday' => $this->UTF8Conf($record[19]),
+                'gender' => $this->UTF8Conf($record[20]),
+                'phone' => $this->UTF8Conf($record[21]),
+                'email' => $this->UTF8Conf($record[22]),
+                'office_address' => $this->UTF8Conf($record[23]),
+                'office_phone' => $this->UTF8Conf($record[24]),
+                'education_level' => $this->UTF8Conf($record[25]),
+                'education_desc' => $this->UTF8Conf($record[26]),
+                'position_level' => $this->UTF8Conf($record[27]),
+                'position_desc' => $this->UTF8Conf($record[28]),
+                'married' => $this->UTF8Conf($record[29]),
+                'religion' => $this->UTF8Conf($record[30]),
+                'main_unit' => $this->UTF8Conf($record[31]),
+                'eselon2' => $this->UTF8Conf($record[32]),
+                'eselon3' => $this->UTF8Conf($record[33]),
+                'eselon4' => $this->UTF8Conf($record[34]),
+                'satker' => $this->UTF8Conf($record[35]),
+                'test_result' => $this->UTF8Conf($record[36]),
+                'graduate_status' => $this->UTF8Conf($record[37]),
+                'activity' => $this->UTF8Conf($record[38]),
+                'presence' => $this->UTF8Conf($record[39]),
+                'pre_test' => $this->UTF8Conf($record[40]),
+                'post_test' => $this->UTF8Conf($record[41]),
+                'cert_no' => $this->UTF8Conf($record[42]),
+                'cert_date' => $this->UTF8Conf($record[43]) instanceof Date ? $this->UTF8Conf($record[43]) : null,
+                'cert_link' => $this->UTF8Conf($record[44]),
+                'execution_value' => $this->UTF8Conf($record[45]),
+                'trainer_value' => $this->UTF8Conf($record[46])
             ];
 
-            if(!empty(array_filter($row))) {
-                TrxResultsModel::create($row);
-            }
+            TrxResultsModel::create($row);
         }
+
+        // DB::table('trx_results')->insert($row);
 
         $this->saveUploadLog($this->changeFileName($rawfile), '', '', $this->email);
 
@@ -148,5 +157,44 @@ class UploadController extends Controller
         $fn = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
         return $fn;
+    }
+
+    private function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = [];
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 9999, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    // $data[] = array_combine($header, $row);
+                    $data[] = $row;
+            }
+            fclose($handle);
+        }
+
+        return $data;
+    }
+
+    private function UTF8Conf($string)
+    {
+        $c = New CleanerHelper();
+
+        // return mb_convert_encoding($c->removeWhiteSpace($string), "UTF-8", "UTF-8");
+
+        if(isset($string))
+        {
+            return $c->removeWhiteSpace($string);
+        }
+        else
+        {
+            return null;
+        }
     }
 }
