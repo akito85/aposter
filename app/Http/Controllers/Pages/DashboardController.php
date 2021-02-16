@@ -28,28 +28,28 @@ class DashboardController extends Controller
         $age = $this->getAggregateAge($trName);
         $echelon = $this->getAggregateEchelon($trName);
         $gender = $this->omniCount($this->omniQuery('gender',
-                                                    'training_name',
+                                                    'trx_name',
                                                     'nip',
                                                     'like',
                                                     '%'. $trName . '%'), 'gender');
         $rankClass = $this->omniCount($this->omniQuery('rank_class',
-                                                        'training_name',
+                                                        'trx_name',
                                                         'nip',
                                                         'like',
                                                         '%'. $trName . '%'), 'rank_class');
-        $education = $this->omniCount($this->omniQuery('education',
-                                                        'training_name',
+        $education = $this->omniCount($this->omniQuery('education_level',
+                                                        'trx_name',
                                                         'nip',
                                                         'like',
-                                                        '%'. $trName . '%'), 'education');
+                                                        '%'. $trName . '%'), 'education_level');
         $pass = $this->omniCount($this->omniQuery('graduate_status',
-                                                    'training_name',
+                                                    'trx_name',
                                                     'nip',
                                                     'like',
                                                     '%'. $trName . '%'), 'graduate_status');
-        $training = $this->omniQuery('training_name',
-                                    'training_name',
-                                    'training_name',
+        $training = $this->omniQuery('trx_name',
+                                    'trx_name',
+                                    'trx_name',
                                     'like');
         $organizations = $this->omniCount($this->omniQuery('organization_name',
                                                             '',
@@ -76,7 +76,7 @@ class DashboardController extends Controller
     private function getAggregateAge($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('birthday', 'training_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery('birthday', 'trx_name', 'nip', 'like', '%'. $trName . '%');
 
         $now = time();
 
@@ -121,7 +121,7 @@ class DashboardController extends Controller
     private function getAggregateEchelon($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('position_desc', 'training_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery('position_desc', 'trx_name', 'nip', 'like', '%'. $trName . '%');
 
         // pattern echelons
         $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
