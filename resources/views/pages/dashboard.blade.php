@@ -52,10 +52,10 @@
                         <option>ALL</option>
                     @if($trainingList)
                         @foreach ($trainingList as $tl)
-                            @if (trim($tl->training_name) == $training)
-                            <option selected>{{ trim($tl->training_name) }}</option>
+                            @if (trim($tl->trx_name) == $training)
+                            <option selected>{{ trim($tl->trx_name) }}</option>
                             @else
-                            <option>{{ trim($tl->training_name) }}</option>
+                            <option>{{ trim($tl->trx_name) }}</option>
                             @endif
                         @endforeach
                     @endif
