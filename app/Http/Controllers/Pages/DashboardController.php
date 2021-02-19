@@ -76,12 +76,12 @@ class DashboardController extends Controller
     private function getAggregateAge($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('birthday', 'trx_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery('trx_end_date', 'trx_name', 'nip', 'like', '%'. $trName . '%');
 
         $now = time();
 
         foreach ($query as $row) {
-            $age = date('Y', $now) - date('Y', strtotime($row->birthday));
+            $age = date('Y', strtotime($row->trx_end_date)) - date('Y', strtotime(substr($row->nip, 0, 4)));
 
             if($age <= 20) {
                 $ages['l1'][] = $age;
