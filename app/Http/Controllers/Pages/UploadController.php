@@ -45,7 +45,7 @@ class UploadController extends Controller
 
         $this->saveUploadLog($this->changeFileName($rawfile), $title, $ta, $this->email);
 
-        // return redirect('upload')->with('status', 'Successfully uploaded!');
+        return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     public function fileUploadResults(UploadResultsRequest $request)
@@ -112,11 +112,9 @@ class UploadController extends Controller
             DB::table('trx_results')->insert($row);
         }
 
-        print_r($row);
-
         $this->saveUploadLog($this->changeFileName($rawfile), '', '', $this->email);
 
-        // return redirect('upload')->with('status', 'Successfully uploaded!');
+        return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     private function listUploadLog()
