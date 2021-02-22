@@ -23,9 +23,9 @@ class UploadController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
 
-        $user = auth()->user();
+        // $user = auth()->user();
         $this->email = 'akito.evol@gmail.com';
     }
 
