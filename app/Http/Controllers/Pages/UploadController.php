@@ -45,7 +45,7 @@ class UploadController extends Controller
 
         $this->saveUploadLog($this->changeFileName($rawfile), $title, $ta, $this->email);
 
-        return redirect('upload')->with('status', 'Successfully uploaded!');
+        // return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     public function fileUploadResults(UploadResultsRequest $request)
