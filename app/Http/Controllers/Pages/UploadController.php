@@ -57,7 +57,7 @@ class UploadController extends Controller
                 // 'stx_id' => $this->UTF8Conf($record[13]),
                 // 'stx_name' => $this->UTF8Conf($record[14]),
                 'nip' => $this->UTF8Conf(ltrim($record[15], "~")),
-                'nrp_nik' => $this->UTF8Conf(ltrim($record[16], "~")),
+                // 'nrp_nik' => $this->UTF8Conf(ltrim($record[16], "~")),
                 'rank_class' => $this->UTF8Conf($record[17]),
                 // 'born' => $this->UTF8Conf($record[18]),
                 // 'birthday' => $this->UTF8Conf($record[19]),
@@ -68,8 +68,8 @@ class UploadController extends Controller
                 // 'office_phone' => $this->UTF8Conf($record[24]),
                 'education_level' => $this->UTF8Conf($record[25]),
                 // 'education_desc' => $this->UTF8Conf($record[26]),
-                'position_level' => $this->UTF8Conf($record[27]),
-                // 'position_desc' => $this->UTF8Conf($record[28]),
+                // 'position_level' => $this->UTF8Conf($record[27]),
+                'position_desc' => $this->UTF8Conf($record[28]),
                 // 'married' => $this->UTF8Conf($record[29]),
                 // 'religion' => $this->UTF8Conf($record[30]),
                 'main_unit' => $this->UTF8Conf($record[31]),
@@ -96,7 +96,7 @@ class UploadController extends Controller
             DB::table('trx_results')->insert($row);
         }
 
-        $this->saveUploadLog($this->changeFileName($rawfile), '', '', Auth::email());
+        $this->saveUploadLog($this->changeFileName($rawfile), '', '', Auth::user()->email);
 
         return redirect('upload')->with('status', 'Successfully uploaded!');
     }
@@ -162,6 +162,7 @@ class UploadController extends Controller
     {
         $c = New CleanerHelper();
 
+        // return $c->removeWhiteSpace($string);
         return mb_convert_encoding($c->removeWhiteSpace($string), "UTF-8", "UTF-8");
     }
 }

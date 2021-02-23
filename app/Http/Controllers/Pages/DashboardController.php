@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\TrxResultsModel;
 
@@ -56,6 +57,7 @@ class DashboardController extends Controller
                                                             'organization_name',
                                                             '',
                                                             ''),'organization_name');
+        $main_unit = $this->omniCount($this->omniQuery('main_unit,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'main_unit');
 
 
         $data = [
@@ -67,7 +69,8 @@ class DashboardController extends Controller
             'echelon' => json_encode($echelon),
             'pass' => json_encode($pass),
             'trainingList' => $training,
-            'organizations' => $organizations
+            'organizations' => $organizations,
+            'main_unit' => json_encode($main_unit)
         ];
 
         return view('pages.dashboard', $data);
@@ -76,14 +79,14 @@ class DashboardController extends Controller
     private function getAggregateAge($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('trx_end_date', 'trx_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery('trx_end_date,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%');
 
         $now = time();
 
         foreach ($query as $row) {
             $age = date('Y', strtotime($row->trx_end_date)) - date('Y', strtotime(substr($row->nip, 0, 4)));
 
-            if($age <= 20) {
+            if($age < 20) {
                 $ages['l1'][] = $age;
             } elseif ($age >= 21 and $age <= 30) {
                 $ages['l2'][] = $age;
@@ -121,7 +124,7 @@ class DashboardController extends Controller
     private function getAggregateEchelon($trName)
     {
         // resulting row of objects
-        $query = $this->omniQuery('position_desc', 'trx_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery('position_desc,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%');
 
         // pattern echelons
         $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
@@ -160,26 +163,30 @@ class DashboardController extends Controller
         return $c;
     }
 
-    private function omniQuery($selectField, $whereField = NULL, $distinctField = NULL, $queryOperator = NULL, $queryString = NULL)
+    private function omniQuery($selectField = [], $whereField = NULL, $distinctField = NULL, $queryOperator = NULL, $queryString = NULL)
     {
         // resulting row of objects
         if(!empty($queryString)) {
             if(empty($distinctField)) {
-                $query = TrxResultsModel::select($selectField)
+                $query = DB::table('trx_results')
+                            ->select(DB::raw($selectField))
                             ->where($whereField, $queryOperator, $queryString)
                             ->get();
             } else {
-                $query = TrxResultsModel::select($selectField)
+                $query = DB::table('trx_results')
+                            ->select(DB::raw($selectField))
                             ->where($whereField, $queryOperator, $queryString)
                             ->distinct($distinctField)
                             ->get();
             }
         } else {
             if(empty($distinctField)) {
-                $query = TrxResultsModel::select($selectField, $distinctField)
+                $query = DB::table('trx_results')
+                            ->select($selectField, $distinctField)
                             ->get();
             } else {
-                $query = TrxResultsModel::select($selectField, $distinctField)
+                $query = DB::table('trx_results')
+                            ->select($selectField, $distinctField)
                             ->distinct($distinctField)
                             ->get();
             }
