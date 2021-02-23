@@ -84,7 +84,7 @@ class UploadController extends Controller
                 'pre_test' => $this->UTF8Conf($record[40]),
                 'post_test' => $this->UTF8Conf($record[41]),
                 'cert_no' => $this->UTF8Conf($record[42]),
-                'cert_date' => $this->UTF8Conf($record[43]) instanceof Date ? $this->UTF8Conf($record[43]) : '1900-01-01',
+                'cert_date' => !empty($this->UTF8Conf($record[43])) ? $this->UTF8Conf($record[43]) : '1900-01-01',
                 'cert_link' => $this->UTF8Conf($record[44]),
                 'execution_value' => $this->UTF8Conf($record[45]),
                 'trainer_value' => $this->UTF8Conf($record[46]),
