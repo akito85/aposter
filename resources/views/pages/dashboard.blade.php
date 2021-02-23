@@ -14,38 +14,11 @@
 
 @section('content')
 <br>
+<br>
+<br>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-primary">
-                                <th>Penyelenggara Pelatihan</th>
-                                <th>Total Pelatihan</th>
-                            </thead>
-                            <tbody>
-                            @if($organizations)
-                                @foreach($organizations as $k => $v)
-                                    <tr>
-                                        <td>{{ $k }}</td><td>{{ $v }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br><br>
-    <div class="row">
-        <div class="col-lg-6 col-xs-12">
-            <h4 class="justify-content-center">{{ $training }}</h4>
-        </div>
-        <div class="col-lg-6 col-xs-12">
+    <div class="row justify-content-center">
+        <div class="col-9">
             <div class="card mt-3 mb-1">
                 <div class="card-body">
                     <select class="training-list form-control form-control-lg">
@@ -64,9 +37,22 @@
             </div>
         </div>
     </div>
-    <hr>
+
+    <br>
+
     <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chart-main-unit"></canvas>
+                    <a class="btn btn-primary chart-main-unit">Unduh Diagram</a>
+                    <a class="btn btn-primary data-main-unit">Lihat Data</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-gender"></canvas>
@@ -75,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-age"></canvas>
@@ -84,7 +70,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-rc"></canvas>
@@ -93,9 +81,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-education"></canvas>
@@ -104,7 +90,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-echelon"></canvas>
@@ -113,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-pass"></canvas>
@@ -192,6 +180,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
 }
 
 initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
+initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Kerja", `<?php echo $main_unit; ?>`);
 initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
 initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
 initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);

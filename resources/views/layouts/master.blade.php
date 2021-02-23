@@ -10,8 +10,8 @@
     <body>
         @if (Auth::check())
         <main class="main-panel">
+            @include('partials.nav')
             <div class="content">
-                @include('partials.sidebar')
                 @yield('content')
             </div>
         </main>

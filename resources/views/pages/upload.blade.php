@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+<br>
+<br>
+<br>
+<br>
 <div class="container-fluid">
 
     <div>{{ isset($success) ? $success : '' }}</div>
