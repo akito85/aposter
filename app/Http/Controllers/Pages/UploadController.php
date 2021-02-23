@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Pages;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use League\Csv\Reader;
-// use App\Http\Requests\UploadParticipantsRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UploadResultsRequest;
 use App\Http\Controllers\Controller;
 use App\Models\UploadLogModel;
-// use App\Models\TrxResultsModel;
 use App\Helpers\CleanerHelper;
-// use Carbon\Carbon;
 class UploadController extends Controller
 {
     public $email;
@@ -23,10 +20,7 @@ class UploadController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
-
-        // $user = auth()->user();
-        $this->email = 'akito.evol@gmail.com';
+        $this->middleware('auth');
     }
 
     /**
@@ -37,15 +31,6 @@ class UploadController extends Controller
     public function index()
     {
         return view('pages.upload', ['logs' => $this->listUploadLog()]);
-    }
-
-    public function fileUploadParticipants(UploadParticipantsRequest $request)
-    {
-        $rawfile = $request->file('data_participants');
-
-        $this->saveUploadLog($this->changeFileName($rawfile), $title, $ta, $this->email);
-
-        return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
     public function fileUploadResults(UploadResultsRequest $request)
@@ -108,11 +93,10 @@ class UploadController extends Controller
                 'filename' => $this->changeFileName($rawfile)
             ];
 
-            // TrxResultsModel::create($row);
             DB::table('trx_results')->insert($row);
         }
 
-        $this->saveUploadLog($this->changeFileName($rawfile), '', '', $this->email);
+        $this->saveUploadLog($this->changeFileName($rawfile), '', '', Auth::email());
 
         return redirect('upload')->with('status', 'Successfully uploaded!');
     }
