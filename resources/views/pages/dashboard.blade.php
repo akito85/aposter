@@ -199,7 +199,7 @@ training.select2();
 
 $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
-    if(data.text != "ALL") {
+    if(data.text != "Pilih") {
         window.location = "/dashboard/" + data.text;
     } else {
         window.location = "/dashboard";
