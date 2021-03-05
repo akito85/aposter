@@ -133,6 +133,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         datasets: [
             {
                 data: values,
+                fontColor: :"#fff",
                 backgroundColor: [
                     "#003f5c","#2f4b7c","#665191","#a05195","#d45087","#f95d6a","#ff7c43","#ffa600",
                     "#ffd700","#ffb14e","#dx8775","#ea5f94","#cd34b5","#9d02d7","#0000ff","#2d4baa",
