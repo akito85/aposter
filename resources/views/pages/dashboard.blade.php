@@ -143,9 +143,9 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             {
                 data: values,
                 backgroundColor: [
-                    "#FEFEFD", "#C2BA7D", "#E69C48", "#DA476B", "#231B34",
+                    "#1983E3", "#C2BA7D", "#E69C48", "#DA476B", "#231B34",
                     "#E4DFC2", "#898B93", "#E1C871", "#AF3A70", "#251933",
-                    "#D8E2E1", "#C16EB5", "#EF2E6C", "#666D77", "#26292B",
+                    "#9DB669", "#C16EB5", "#EF2E6C", "#666D77", "#26292B",
                     // "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
                     // "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
                     // "#03071e", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02",
@@ -170,6 +170,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         },
         plugins: {
             datalabels: {
+                color: "#fff",
                 anchor: "center",
                 clamp: true
             }

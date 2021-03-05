@@ -54,6 +54,7 @@ class UploadController extends Controller
                 'education_level' => $this->UTF8Conf($record[25]),
                 'position_desc' => $this->UTF8Conf($record[28]),
                 'main_unit' => $this->UTF8Conf($record[31]),
+                'eselon2' => $this->UTF8Conf($record[32]),
                 'graduate_status' => $this->UTF8Conf($record[37]),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
