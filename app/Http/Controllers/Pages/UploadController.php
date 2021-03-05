@@ -109,7 +109,9 @@ class UploadController extends Controller
 
         $header = null;
         $data = [];
-        if (($handle = fopen($filename, 'r')) !== false)
+
+        $handle = file($filename, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+        if ($handle)
         {
             while (($row = fgetcsv($handle, 9999, $delimiter)) !== false)
             {
