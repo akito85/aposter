@@ -41,10 +41,21 @@
     <br>
 
     <div class="row justify-content-center">
-        <div class="col-sm-9">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-main-unit"></canvas>
+                    <a class="btn btn-primary chart-main-unit">Unduh Diagram</a>
+                    <a class="btn btn-primary data-main-unit">Lihat Data</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chart-sub-unit"></canvas>
                     <a class="btn btn-primary chart-main-unit">Unduh Diagram</a>
                     <a class="btn btn-primary data-main-unit">Lihat Data</a>
                 </div>
@@ -134,8 +145,11 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             {
                 data: values,
                 backgroundColor: [
-                    "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
-                    "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
+                    "#FEFEFD", "#C2BA7D", "#E69C48", "#DA476B", "#231B34",
+                    "#E4DFC2", "#898B93", "#E1C871", "#AF3A70", "#251933",
+                    "#D8E2E1", "#C16EB5", "#EF2E6C", "#666D77", "#26292B",
+                    // "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
+                    // "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
                     // "#03071e", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02",
                     // "#e85d04", "#f48c06", "#f48c06", "#faa307", "#ffba08"
                 ]
@@ -180,7 +194,8 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
 }
 
 initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
-initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Kerja", `<?php echo $main_unit; ?>`);
+initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`);
+initiateChart("chart-sub-unit", "horizontalBar", "Peserta Berdasarkan Sub Unit Kerja (ES II)", `<?php echo $sub_unit; ?>`);
 initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
 initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
 initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);

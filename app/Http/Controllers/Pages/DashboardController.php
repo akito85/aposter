@@ -58,6 +58,7 @@ class DashboardController extends Controller
                                                             '',
                                                             ''),'organization_name');
         $main_unit = $this->omniCount($this->omniQuery('main_unit,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'main_unit');
+        $sub_unit = $this->omniCount($this->omniQuery('eselon2,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'eselon2');
 
 
         $data = [
@@ -70,7 +71,8 @@ class DashboardController extends Controller
             'pass' => json_encode($pass),
             'trainingList' => $training,
             'organizations' => $organizations,
-            'main_unit' => json_encode($main_unit)
+            'main_unit' => json_encode($main_unit),
+            'sub_unit' => json_encode($sub_unit),
         ];
 
         return view('pages.dashboard', $data);
