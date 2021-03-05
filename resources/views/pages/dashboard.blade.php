@@ -45,8 +45,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-main-unit"></canvas>
-                    <button class="btn btn-primary chart-main-unit">Unduh Diagram</button>
-                    <button class="btn btn-primary data-main-unit">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-main-unit">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-main-unit">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -54,8 +54,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-gender"></canvas>
-                    <button class="btn btn-primary chart-gender">Unduh Diagram</button>
-                    <button class="btn btn-primary data-gender">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-gender">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-gender">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -65,8 +65,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-age"></canvas>
-                    <button class="btn btn-primary chart-age">Unduh Diagram</button>
-                    <button class="btn btn-primary data-age">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-age">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-age">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -74,8 +74,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-rc"></canvas>
-                    <button class="btn btn-primary chart-rc">Unduh Diagram</button>
-                    <button class="btn btn-primary data-rc">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-rc">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-rc">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -85,8 +85,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-education"></canvas>
-                    <button class="btn btn-primary chart-education">Unduh Diagram</button>
-                    <button class="btn btn-primary data-education">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-education">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-education">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -94,8 +94,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-echelon"></canvas>
-                    <button class="btn btn-primary chart-echelon">Unduh Diagram</button>
-                    <button class="btn btn-primary data-echelon">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-echelon">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-echelon">Lihat Data</a>
                 </div>
             </div>
         </div>
@@ -105,8 +105,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-pass"></canvas>
-                    <button class="btn btn-primary chart-pass">Unduh Diagram</button>
-                    <button class="btn btn-primary data-pass">Lihat Data</button>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-pass">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-pass">Lihat Data</a>
                 </div>
             </div>
         </div>
