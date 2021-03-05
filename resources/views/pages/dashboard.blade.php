@@ -160,6 +160,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         },
         plugins: {
             datalabels: {
+                fontColor: "#fff",
                 anchor: "center",
                 clamp: true
             }
