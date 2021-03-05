@@ -22,7 +22,6 @@
             <div class="card mt-3 mb-1">
                 <div class="card-body">
                     <select class="training-list form-control form-control-lg">
-                        <option>ALL</option>
                     @if($trainingList)
                         @foreach ($trainingList as $tl)
                             @if (trim($tl->trx_name) == $training)
