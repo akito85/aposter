@@ -44,8 +44,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-main-unit"></canvas>
-                    <a class="btn btn-primary chart-main-unit">Unduh Diagram</a>
-                    <a class="btn btn-primary data-main-unit">Lihat Data</a>
+                    <button class="btn btn-primary chart-main-unit">Unduh Diagram</button>
+                    <button class="btn btn-primary data-main-unit">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -53,8 +53,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-gender"></canvas>
-                    <a class="btn btn-primary chart-gender">Unduh Diagram</a>
-                    <a class="btn btn-primary data-gender">Lihat Data</a>
+                    <button class="btn btn-primary chart-gender">Unduh Diagram</button>
+                    <button class="btn btn-primary data-gender">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -64,8 +64,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-age"></canvas>
-                    <a class="btn btn-primary chart-age">Unduh Diagram</a>
-                    <a class="btn btn-primary data-age">Lihat Data</a>
+                    <button class="btn btn-primary chart-age">Unduh Diagram</button>
+                    <button class="btn btn-primary data-age">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-rc"></canvas>
-                    <a class="btn btn-primary chart-rc">Unduh Diagram</a>
-                    <a class="btn btn-primary data-rc">Lihat Data</a>
+                    <button class="btn btn-primary chart-rc">Unduh Diagram</button>
+                    <button class="btn btn-primary data-rc">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -84,8 +84,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-education"></canvas>
-                    <a class="btn btn-primary chart-education">Unduh Diagram</a>
-                    <a class="btn btn-primary data-education">Lihat Data</a>
+                    <button class="btn btn-primary chart-education">Unduh Diagram</button>
+                    <button class="btn btn-primary data-education">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -93,8 +93,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-echelon"></canvas>
-                    <a class="btn btn-primary chart-echelon">Unduh Diagram</a>
-                    <a class="btn btn-primary data-echelon">Lihat Data</a>
+                    <button class="btn btn-primary chart-echelon">Unduh Diagram</button>
+                    <button class="btn btn-primary data-echelon">Lihat Data</button>
                 </div>
             </div>
         </div>
@@ -104,8 +104,8 @@
             <div class="card">
                 <div class="card-body">
                     <canvas id="chart-pass"></canvas>
-                    <a class="btn btn-primary chart-pass">Unduh Diagram</a>
-                    <a class="btn btn-primary data-pass">Lihat Data</a>
+                    <button class="btn btn-primary chart-pass">Unduh Diagram</button>
+                    <button class="btn btn-primary data-pass">Lihat Data</button>
                 </div>
             </div>
         </div>
