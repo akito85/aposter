@@ -191,6 +191,17 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
     });
 }
 
+if(window.location != "/dashboard/") {
+    initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
+    initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`);
+    initiateChart("chart-sub-unit", "horizontalBar", "Peserta Berdasarkan Sub Unit Kerja (ES II)", `<?php echo $sub_unit; ?>`);
+    initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
+    initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
+    initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);
+    initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`);
+    initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`);
+}
+
 var training = $(".training-list");
 training.select2();
 
@@ -198,16 +209,6 @@ $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
     if(data.text != "ALL") {
         window.location = "/dashboard/" + data.text;
-
-        initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
-        initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`);
-        initiateChart("chart-sub-unit", "horizontalBar", "Peserta Berdasarkan Sub Unit Kerja (ES II)", `<?php echo $sub_unit; ?>`);
-        initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
-        initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
-        initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);
-        initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`);
-        initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`);
-
     } else {
         window.location = "/dashboard";
     }
