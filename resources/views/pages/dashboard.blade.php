@@ -135,7 +135,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
                 data: values,
                 backgroundColor: [
                     "#003f5c","#2f4b7c","#665191","#a05195","#d45087","#f95d6a","#ff7c43","#ffa600",
-                    "#ffd700","#ffb14e","#fa8775","#ea5f94","#cd34b5","#9d02d7","#0000ff","#2d4baa",
+                    "#ffd700","#ffb14e","#dx8775","#ea5f94","#cd34b5","#9d02d7","#0000ff","#2d4baa",
                     // "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
                     // "#03071e", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02",
                     // "#e85d04", "#f48c06", "#f48c06", "#faa307", "#ffba08"
