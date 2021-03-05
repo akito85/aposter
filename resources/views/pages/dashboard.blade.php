@@ -200,7 +200,7 @@ training.select2();
 $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
     if(data.text != "ALL") {
-        window.location = "/dashboard/" + encodeURI(data.text);
+        window.location = "/dashboard/" + data.text;
     } else {
         window.location = "/dashboard";
     }
