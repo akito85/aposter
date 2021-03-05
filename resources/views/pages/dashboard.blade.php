@@ -52,23 +52,14 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <canvas id="chart-sub-unit"></canvas>
-                    <a class="btn btn-primary chart-main-unit">Unduh Diagram</a>
-                    <a class="btn btn-primary data-main-unit">Lihat Data</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-body">
                     <canvas id="chart-gender"></canvas>
                     <a class="btn btn-primary chart-gender">Unduh Diagram</a>
                     <a class="btn btn-primary data-gender">Lihat Data</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -78,8 +69,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -89,6 +78,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -98,8 +89,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -109,6 +98,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -209,7 +200,7 @@ training.select2();
 $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
     if(data.text != "ALL") {
-        window.location = "/dashboard/" + data.text;
+        window.location = "/dashboard/" + encodeURI(data.text);
     } else {
         window.location = "/dashboard";
     }
