@@ -26,54 +26,57 @@ class DashboardController extends Controller
      */
     public function index(Request $request, $trName = NULL)
     {
-        $age = $this->getAggregateAge($trName);
-        $echelon = $this->getAggregateEchelon($trName);
-        $gender = $this->omniCount($this->omniQuery('gender',
-                                                    'trx_name',
-                                                    'nip',
-                                                    'like',
-                                                    '%'. $trName . '%'), 'gender');
-        $rankClass = $this->omniCount($this->omniQuery('rank_class',
+        if(!empty($trName))
+        {
+            $age = $this->getAggregateAge($trName);
+            $echelon = $this->getAggregateEchelon($trName);
+            $gender = $this->omniCount($this->omniQuery('gender',
                                                         'trx_name',
                                                         'nip',
                                                         'like',
-                                                        '%'. $trName . '%'), 'rank_class');
-        $education = $this->omniCount($this->omniQuery('education_level',
+                                                        '%'. $trName . '%'), 'gender');
+            $rankClass = $this->omniCount($this->omniQuery('rank_class',
+                                                            'trx_name',
+                                                            'nip',
+                                                            'like',
+                                                            '%'. $trName . '%'), 'rank_class');
+            $education = $this->omniCount($this->omniQuery('education_level',
+                                                            'trx_name',
+                                                            'nip',
+                                                            'like',
+                                                            '%'. $trName . '%'), 'education_level');
+            $pass = $this->omniCount($this->omniQuery('graduate_status',
                                                         'trx_name',
                                                         'nip',
                                                         'like',
-                                                        '%'. $trName . '%'), 'education_level');
-        $pass = $this->omniCount($this->omniQuery('graduate_status',
-                                                    'trx_name',
-                                                    'nip',
-                                                    'like',
-                                                    '%'. $trName . '%'), 'graduate_status');
-        $training = $this->omniQuery('trx_name',
-                                    'trx_name',
-                                    'trx_name',
-                                    'like');
-        $organizations = $this->omniCount($this->omniQuery('organization_name',
-                                                            '',
-                                                            'organization_name',
-                                                            '',
-                                                            ''),'organization_name');
-        $main_unit = $this->omniCount($this->omniQuery('main_unit,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'main_unit');
-        $sub_unit = $this->omniCount($this->omniQuery('eselon2,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'eselon2');
+                                                        '%'. $trName . '%'), 'graduate_status');
+            $training = $this->omniQuery('trx_name',
+                                        'trx_name',
+                                        'trx_name',
+                                        'like');
+            $organizations = $this->omniCount($this->omniQuery('organization_name',
+                                                                '',
+                                                                'organization_name',
+                                                                '',
+                                                                ''),'organization_name');
+            $main_unit = $this->omniCount($this->omniQuery('main_unit,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'main_unit');
+            $sub_unit = $this->omniCount($this->omniQuery('eselon2,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'eselon2');
 
 
-        $data = [
-            'training' => $trName,
-            'gender' => json_encode($gender),
-            'age' => json_encode($age),
-            'rc' => json_encode($rankClass),
-            'education' => json_encode($education),
-            'echelon' => json_encode($echelon),
-            'pass' => json_encode($pass),
-            'trainingList' => $training,
-            'organizations' => $organizations,
-            'main_unit' => json_encode($main_unit),
-            'sub_unit' => json_encode($sub_unit),
-        ];
+            $data = [
+                'training' => $trName,
+                'gender' => json_encode($gender),
+                'age' => json_encode($age),
+                'rc' => json_encode($rankClass),
+                'education' => json_encode($education),
+                'echelon' => json_encode($echelon),
+                'pass' => json_encode($pass),
+                'trainingList' => $training,
+                'organizations' => $organizations,
+                'main_unit' => json_encode($main_unit),
+                'sub_unit' => json_encode($sub_unit),
+            ];
+        }
 
         return view('pages.dashboard', $data);
     }
