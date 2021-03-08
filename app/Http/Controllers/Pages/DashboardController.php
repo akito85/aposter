@@ -26,6 +26,9 @@ class DashboardController extends Controller
      */
     public function index(Request $request, $trName = NULL)
     {
+
+        $data = [];
+
         if(!empty($trName))
         {
             $age = $this->getAggregateAge($trName);
