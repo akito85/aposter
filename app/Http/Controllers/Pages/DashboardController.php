@@ -26,6 +26,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request, $trName = NULL)
     {
+        $training = $this->omniQuery('trx_name','trx_name','trx_name','like');
 
         $data = [
             'training' => '',
@@ -65,10 +66,6 @@ class DashboardController extends Controller
                                                         'nip',
                                                         'like',
                                                         '%'. $trName . '%'), 'graduate_status');
-            $training = $this->omniQuery('trx_name',
-                                        'trx_name',
-                                        'trx_name',
-                                        'like');
             $organizations = $this->omniCount($this->omniQuery('organization_name',
                                                                 '',
                                                                 'organization_name',
