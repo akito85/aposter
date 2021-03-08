@@ -36,7 +36,7 @@ class DashboardController extends Controller
             'education' => '',
             'echelon' => '',
             'pass' => '',
-            'trainingList' => '',
+            'trainingList' => $training,
             'organizations' => '',
             'main_unit' => '',
             'sub_unit' => '',
