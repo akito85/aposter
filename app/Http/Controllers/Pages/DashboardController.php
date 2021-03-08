@@ -105,13 +105,13 @@ class DashboardController extends Controller
 
             if($age < 20) {
                 $ages['l1'][] = $age;
-            } elseif ($age >= 21 and $age <= 30) {
+            } elseif ($age >= 20 and $age < 30) {
                 $ages['l2'][] = $age;
-            } elseif ($age >= 31 and $age <= 40) {
+            } elseif ($age >= 30 and $age < 40) {
                 $ages['l3'][] = $age;
-            } elseif ($age >= 41 and $age <= 50) {
+            } elseif ($age >= 40 and $age < 50) {
                 $ages['l4'][] = $age;
-            } elseif ($age >= 51 and $age <= 60) {
+            } elseif ($age >= 50 and $age < 60) {
                 $ages['l5'][] = $age;
             } else {
                 $ages['l6'][] = $age;
@@ -127,12 +127,12 @@ class DashboardController extends Controller
 
 
         $tier = [
-            '1 - 20' => $tier1,
-            '21 - 30' => $tier2,
-            '31 - 40' => $tier3,
-            '41 - 50' => $tier4,
-            '51 - 60' => $tier5,
-            'lainnya' => $tier6
+            '1 - 19' => $tier1,
+            '20 - 29' => $tier2,
+            '30 - 39' => $tier3,
+            '40 - 49' => $tier4,
+            '50 - 59' => $tier5,
+            '> 60' => $tier6
         ];
 
         return $tier;
