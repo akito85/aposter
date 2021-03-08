@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::get('/', 'Pages\DashboardController@index')->name('root');
 Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/dashboard/{trName?}', 'Pages\DashboardController@index')->name('dashboard-training');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');
