@@ -27,7 +27,19 @@ class DashboardController extends Controller
     public function index(Request $request, $trName = NULL)
     {
 
-        $data = [];
+        $data = [
+            'training' => '',
+            'gender' => '',
+            'age' => '',
+            'rc' => '',
+            'education' => '',
+            'echelon' => '',
+            'pass' => '',
+            'trainingList' => '',
+            'organizations' => '',
+            'main_unit' => '',
+            'sub_unit' => '',
+        ];
 
         if(!empty($trName))
         {
