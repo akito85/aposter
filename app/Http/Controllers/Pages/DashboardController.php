@@ -29,9 +29,10 @@ class DashboardController extends Controller
         $training = $this->omniQuery(
             ['trx_id', 'trx_name', 'trx_start_date'],
             [
-                ['trx_start_date', '=>', '2020-11-1'],
-                ['trx_start_date', '<=', '2020-12-31']
-            ]
+                ['trx_start_date', '>=', '2020-11-1 01:00'],
+                ['trx_start_date', '<=', '2020-12-31 01:00']
+            ],
+            ['trx_name']
         );
 
         $data = [
@@ -186,22 +187,15 @@ class DashboardController extends Controller
         return $c;
     }
 
-    private function omniQuery($selectField = [], $whereField = [], $distinctField = NULL)
+    private function omniQuery($selectField = [], $whereField = [], $distinctField = [])
     {
         // resulting row of objects
-        if(empty($distinctField)) {
-            $query = DB::table('trx_results')
-                        ->select($selectField)
-                        ->where($whereField)
-                        ->get();
-        } else {
-            $query = DB::table('trx_results')
-                        ->select($selectField)
-                        ->where($whereField, $queryOperator, $queryString)
-                        ->distinct($distinctField)
-                        ->get();
-        }
-
+        $query = DB::table('trx_results')
+                    ->select($selectField)
+                    ->where($whereField)
+                    ->distinct($distinctField)
+                    ->get();
+        
         return $query;
     }
 
