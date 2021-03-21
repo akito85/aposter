@@ -10,6 +10,7 @@
     {
         color: #ffffff !important;
     }
+    .select2-container {max-height: 41px;}
 @endsection
 
 @section('content')
@@ -18,24 +19,27 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-9">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card mt-3 mb-1">
                 <div class="card-body">
-                    <input type="text" name="daterange">
+
+                    <form>
+                        <div class="form-group">
+                            <input id="periode" type="text" name="daterange" class="form-control">                
+                        </div>
+                    </form>                
+                    
                     <select class="training-list form-control form-control-lg">
-                    <option>Pilih</option>
-                    @if($trainingList)
-                        @foreach ($trainingList as $tl)
-                            {{--
-                            @if (trim($tl->trx_name) == $training)
-                            <option value="{{ trim($tl->trx_id) }}" selected>{{ trim($tl->trx_name) }}</option>
-                            @else
-                            <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
-                            @endif
-                            --}}
-                            <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
-                        @endforeach
-                    @endif
+                        <option>Pilih</option>
+                        @if($trainingList)
+                            @foreach ($trainingList as $tl)
+                                @if (trim($tl->trx_id) == $training)
+                                <option value="{{ trim($tl->trx_id) }}" selected>{{ trim($tl->trx_name) }}</option>
+                                @else
+                                <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
+                                @endif
+                            @endforeach
+                        @endif
                     </select>
                 </div>
             </div>
@@ -187,8 +191,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         options: options
     });
 }
-
-if(window.location.pathname != "/dashboard") {
+if(window.location.pathname != "/") {
     initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
     initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`);
     initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
@@ -202,20 +205,24 @@ $(".training-list").select2();
 
 $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
-    if(data.text != "Pilih") {
-        window.location = "/dashboard/" + data.text;
-    } else {
-        window.location = "/dashboard";
-    }
+    var start = `<?php echo $start; ?>`;
+    var end = `<?php echo $end; ?>`;
+        window.location = "/dashboard/" + start + "/" + end + "/" + data.id;
 });
 
 $('input[name="daterange"]').daterangepicker({
     timePicker: false,
-    startDate: moment(),
-    endDate: moment(),
+    startDate: `<?php echo $start; ?>`,
+    endDate: `<?php echo $end; ?>`,
     locale: {
         format: 'YYYY-MM-DD'
     }
+});
+
+$('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+  var start = picker.startDate.format('YYYY-MM-DD');
+  var end = picker.endDate.format('YYYY-MM-DD');
+  window.location = "/dashboard/" + start + "/" + end + "/";
 });
 </script>
 @endsection

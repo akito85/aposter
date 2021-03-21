@@ -10,9 +10,7 @@
     <body>
 
         <main class="main-panel">
-        @if (Auth::check())
             @include('partials.nav')
-        @endif
             <div class="content">
                 @yield('content')
             </div>
