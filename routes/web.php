@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', 'Pages\DashboardController@index')->name('index');
+Route::get('/', function () {
+    return redirect('/dashboard' . '/' . date('Y-m-01') . '/' . date('Y-m-t'));
+});
 Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
-Route::get('/dashboard/{trName?}', 'Pages\DashboardController@index')->name('dashboard-training');
+Route::get('/dashboard/{start}/{end}/{trxID?}', 'Pages\DashboardController@index')->name('dashboard-training');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');
 
 Route::post('/fileUploadParticipants', 'Pages\UploadController@fileUploadParticipants')->name('file-participants');
