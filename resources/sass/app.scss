@@ -1,5 +1,21 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+// Fonts
+@font-face {
+    font-family: 'nucleo-icons';
+    src: url('../../public/assets/vendors/paper/fonts/nucleo-icons.eot') format('eot'),
+        url('../../public/assets/vendors/paper/fonts/nucleo-icons.woff2') format('woff2'),
+        url('../../public/assets/vendors/paper/fonts/nucleo-icons.woff') format('woff'),
+        url('../../public/assets/vendors/paper/fonts/nucleo-icons.ttf') format('truetype');
+}
+
 // Variables
 @import 'variables';
+
+
+// Css
+@import '../../public/assets/vendors/paper/css/bootstrap.min.css';
+@import '../../public/assets/vendors/select2/css/select2.min.css';
+@import '../../public/assets/vendors/paper/css/paper-dashboard.min.css';
+@import '../../public/assets/vendors/daterangepicker/css/daterangepicker.min.css';
