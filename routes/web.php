@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', function() {
-    return redirect('/login');
-});
+Route::get('/', 'Pages\DashboardController@index')->name('index');
 Route::get('/dashboard', 'Pages\DashboardController@index')->name('dashboard');
 Route::get('/dashboard/{trName?}', 'Pages\DashboardController@index')->name('dashboard-training');
 Route::get('/upload', 'Pages\UploadController@index')->name('upload');

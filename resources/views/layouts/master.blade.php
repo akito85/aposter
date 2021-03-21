@@ -8,16 +8,15 @@
         </style>
     </head>
     <body>
-        @if (Auth::check())
+
         <main class="main-panel">
+        @if (Auth::check())
             @include('partials.nav')
+        @endif
             <div class="content">
                 @yield('content')
             </div>
         </main>
-        @else
-        @yield('content')
-        @endif
 
         <script src="{{ asset('assets/vendors/paper/js/paper-dashboard.min.js') }}"></script>
         @yield('custom_js')
