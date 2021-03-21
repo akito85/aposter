@@ -26,7 +26,13 @@ class DashboardController extends Controller
      */
     public function index(Request $request, $trName = NULL)
     {
-        $training = $this->omniQuery('trx_name','trx_name','trx_name','like');
+        $training = $this->omniQuery(
+            ['trx_id', 'trx_name', 'trx_start_date'],
+            [
+                ['trx_start_date', '=>', '2020-11-1'],
+                ['trx_start_date', '<=', '2020-12-31']
+            ]
+        );
 
         $data = [
             'training' => '',
@@ -180,33 +186,20 @@ class DashboardController extends Controller
         return $c;
     }
 
-    private function omniQuery($selectField = [], $whereField = NULL, $distinctField = NULL, $queryOperator = NULL, $queryString = NULL)
+    private function omniQuery($selectField = [], $whereField = [], $distinctField = NULL)
     {
         // resulting row of objects
-        if(!empty($queryString)) {
-            if(empty($distinctField)) {
-                $query = DB::table('trx_results')
-                            ->select(DB::raw($selectField))
-                            ->where($whereField, $queryOperator, $queryString)
-                            ->get();
-            } else {
-                $query = DB::table('trx_results')
-                            ->select(DB::raw($selectField))
-                            ->where($whereField, $queryOperator, $queryString)
-                            ->distinct($distinctField)
-                            ->get();
-            }
+        if(empty($distinctField)) {
+            $query = DB::table('trx_results')
+                        ->select($selectField)
+                        ->where($whereField)
+                        ->get();
         } else {
-            if(empty($distinctField)) {
-                $query = DB::table('trx_results')
-                            ->select($selectField, $distinctField)
-                            ->get();
-            } else {
-                $query = DB::table('trx_results')
-                            ->select($selectField, $distinctField)
-                            ->distinct($distinctField)
-                            ->get();
-            }
+            $query = DB::table('trx_results')
+                        ->select($selectField)
+                        ->where($whereField, $queryOperator, $queryString)
+                        ->distinct($distinctField)
+                        ->get();
         }
 
         return $query;
