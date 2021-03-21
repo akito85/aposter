@@ -26,11 +26,14 @@
                     <option>Pilih</option>
                     @if($trainingList)
                         @foreach ($trainingList as $tl)
+                            {{--
                             @if (trim($tl->trx_name) == $training)
                             <option value="{{ trim($tl->trx_id) }}" selected>{{ trim($tl->trx_name) }}</option>
                             @else
                             <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
                             @endif
+                            --}}
+                            <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
                         @endforeach
                     @endif
                     </select>
@@ -195,8 +198,7 @@ if(window.location.pathname != "/dashboard") {
     initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`);
 }
 
-var training = $(".training-list");
-training.select2();
+$(".training-list").select2();
 
 $(".training-list").on('select2:select', function (e) {
     var data = e.params.data;
@@ -215,6 +217,5 @@ $('input[name="daterange"]').daterangepicker({
         format: 'YYYY-MM-DD'
     }
 });
-
 </script>
 @endsection
