@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\TrxResultsModel;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,86 +25,133 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request, $trName = NULL)
+    public function index(Request $request, $start = null, $end = null, $trxID = null)
     {
-        $training = $this->omniQuery(
+        $trx = $this->omniQuery(
             ['trx_id', 'trx_name', 'trx_start_date'],
             [
-                ['trx_start_date', '>=', '2020-11-1 01:00'],
-                ['trx_start_date', '<=', '2020-12-31 01:00']
+                // ['trx_id', '=', $trxID],
             ],
-            ['trx_name']
+            ['trx_start_date', [$start, $end]],
+            ['trx_id']
         );
 
         $data = [
-            'training' => '',
-            'gender' => '',
-            'age' => '',
-            'rc' => '',
-            'education' => '',
-            'echelon' => '',
-            'pass' => '',
-            'trainingList' => $training,
-            'organizations' => '',
-            'main_unit' => '',
-            'sub_unit' => '',
+            'training' => $trxID,
+            'gender' => json_encode([]),
+            'age' => json_encode([]),
+            'rc' => json_encode([]),
+            'education' => json_encode([]),
+            'echelon' => json_encode([]),
+            'pass' => json_encode([]),
+            'trainingList' => $trx,
+            'organizations' => json_encode([]),
+            'main_unit' => json_encode([]),
+            'sub_unit' => json_encode([]),
+            'start' => $start,
+            'end' => $end
         ];
 
-        if(!empty($trName))
+        if(!empty($trxID))
         {
-            $age = $this->getAggregateAge($trName);
-            $echelon = $this->getAggregateEchelon($trName);
-            $gender = $this->omniCount($this->omniQuery('gender',
-                                                        'trx_name',
-                                                        'nip',
-                                                        'like',
-                                                        '%'. $trName . '%'), 'gender');
-            $rankClass = $this->omniCount($this->omniQuery('rank_class',
-                                                            'trx_name',
-                                                            'nip',
-                                                            'like',
-                                                            '%'. $trName . '%'), 'rank_class');
-            $education = $this->omniCount($this->omniQuery('education_level',
-                                                            'trx_name',
-                                                            'nip',
-                                                            'like',
-                                                            '%'. $trName . '%'), 'education_level');
-            $pass = $this->omniCount($this->omniQuery('graduate_status',
-                                                        'trx_name',
-                                                        'nip',
-                                                        'like',
-                                                        '%'. $trName . '%'), 'graduate_status');
-            $organizations = $this->omniCount($this->omniQuery('organization_name',
-                                                                '',
-                                                                'organization_name',
-                                                                '',
-                                                                ''),'organization_name');
-            $main_unit = $this->omniCount($this->omniQuery('main_unit,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'main_unit');
-            $sub_unit = $this->omniCount($this->omniQuery('eselon2,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%'), 'eselon2');
+            $age = $this->getAggregateAge($start, $end, $trxID);
+            $ech = $this->getAggregateEchelon($start, $end, $trxID);
+            $sex = $this->omniCount(
+                $this->omniQuery(
+                    ['gender','nip', 'trx_id'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']),
+                'gender');
+            $cls = $this->omniCount(
+                $this->omniQuery(
+                    ['rank_class','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']), 
+                'rank_class');
+            $edu = $this->omniCount(
+                $this->omniQuery(
+                    ['education_level','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']), 
+                'education_level');
+            $pas = $this->omniCount(
+                $this->omniQuery(
+                    ['graduate_status','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']),         
+                'graduate_status');
+            $org = $this->omniCount(
+                $this->omniQuery(                   
+                    ['organization_name','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']), 
+                'organization_name');
+            $pri = $this->omniCount(
+                $this->omniQuery(
+                    ['main_unit','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']),
+                'main_unit');
+            $sec = $this->omniCount(
+                $this->omniQuery(
+                    ['eselon2','nip'],
+                    [
+                        ['trx_id', '=', $trxID],
+                    ],
+                    ['trx_start_date', [$start, $end]],
+                    ['nip']),
+                'eselon2');
 
 
             $data = [
-                'training' => $trName,
-                'gender' => json_encode($gender),
+                'training' => $trxID,
+                'gender' => json_encode($sex),
                 'age' => json_encode($age),
-                'rc' => json_encode($rankClass),
-                'education' => json_encode($education),
-                'echelon' => json_encode($echelon),
-                'pass' => json_encode($pass),
-                'trainingList' => $training,
-                'organizations' => $organizations,
-                'main_unit' => json_encode($main_unit),
-                'sub_unit' => json_encode($sub_unit),
+                'rc' => json_encode($cls),
+                'education' => json_encode($edu),
+                'echelon' => json_encode($ech),
+                'pass' => json_encode($pas),
+                'trainingList' => $trx,
+                'organizations' => $org,
+                'main_unit' => json_encode($pri),
+                'sub_unit' => json_encode($sec),
+                'start' => $start,
+                'end' => $end
             ];
         }
 
         return view('pages.dashboard', $data);
     }
 
-    private function getAggregateAge($trName)
+    private function getAggregateAge($start, $end, $trxID)
     {
         // resulting row of objects
-        $query = $this->omniQuery('trx_end_date,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery(
+            ['trx_id','trx_end_date','nip'],
+            [
+                ['trx_id', '=', $trxID],
+            ],
+            ['trx_start_date', [$start, $end]],
+            ['nip'] 
+        );
 
         $now = time();
 
@@ -145,10 +193,17 @@ class DashboardController extends Controller
         return $tier;
     }
 
-    private function getAggregateEchelon($trName)
+    private function getAggregateEchelon($start, $end, $trxID)
     {
         // resulting row of objects
-        $query = $this->omniQuery('position_desc,nip', 'trx_name', 'nip', 'like', '%'. $trName . '%');
+        $query = $this->omniQuery(
+            ['trx_id','position_desc','nip'],
+            [
+                ['trx_id', '=', $trxID],
+            ],
+            ['trx_start_date', [$start, $end]],
+            ['nip']
+        );
 
         // pattern echelons
         $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
@@ -187,12 +242,13 @@ class DashboardController extends Controller
         return $c;
     }
 
-    private function omniQuery($selectField = [], $whereField = [], $distinctField = [])
+    private function omniQuery($selectField = [], $whereField = [], $betweenField = [], $distinctField = [])
     {
         // resulting row of objects
         $query = DB::table('trx_results')
                     ->select($selectField)
                     ->where($whereField)
+                    ->whereBetween($betweenField[0],$betweenField[1])
                     ->distinct($distinctField)
                     ->get();
         
