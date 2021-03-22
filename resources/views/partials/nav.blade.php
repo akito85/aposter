@@ -27,7 +27,7 @@
                 @else
                 <li class="nav-item">
                 @endif
-                    <a class="nav-link" href="/dashboard">
+                    <a class="nav-link" href="/">
                         <i class="nc-icon nc-chart-bar-32"></i>
                         <p>Dashboard</p>
                     </a>
