@@ -114,7 +114,7 @@ class UploadController extends Controller
 
         if (($handle = fopen($filename, 'r')) !== false)
         {
-            while (($row = fgetcsv($handle, 9999, max($delimiter))) !== false)
+            while (($row = fgetcsv($handle, 9999, $delimiter)) !== false)
             {
                 if (!$header)
                     $header = $row;
