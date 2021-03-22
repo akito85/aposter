@@ -43,8 +43,8 @@ class UploadController extends Controller
             $row = [
                 'trx_id' => $this->UTF8Conf($record[0]),
                 'trx_name' => $this->UTF8Conf($record[1]),
-                'trx_start_date' => $this->UTF8Conf($record[2]),
-                'trx_end_date' => $this->UTF8Conf($record[3]),
+                'trx_start_date' => $this->UTF8Conf(date("Y-m-d", strtotime($record[2]))),
+                'trx_end_date' => $this->UTF8Conf(date("Y-m-d", strtotime($record[3]))),
                 'organization_name' => $this->UTF8Conf($record[6]),
                 'stx_id' => $this->UTF8Conf($record[13]),
                 'nip' => $this->UTF8Conf(ltrim($record[15], "~")),
