@@ -30,7 +30,7 @@
                     </form>                
                     
                     <select class="training-list form-control form-control-lg">
-                        <option>Pilih</option>
+                        <option value="ALL">ALL</option>
                         @if($trainingList)
                             @foreach ($trainingList as $tl)
                                 @if (trim($tl->trx_id) == $training)
@@ -222,7 +222,7 @@ $('input[name="daterange"]').daterangepicker({
 $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   var start = picker.startDate.format('YYYY-MM-DD');
   var end = picker.endDate.format('YYYY-MM-DD');
-  window.location = "/dashboard/" + start + "/" + end + "/";
+  window.location = "/dashboard/" + start + "/" + end + "/ALL";
 });
 </script>
 @endsection
