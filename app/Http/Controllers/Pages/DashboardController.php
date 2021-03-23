@@ -63,17 +63,9 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']), 
+                ['nip']),
             'rank_class');
-        $edu = $this->omniCount(
-            $this->omniQuery(
-                ['education_level','nip'],
-                [
-                    $whereTrxID,
-                ],
-                ['trx_start_date', [$start, $end]],
-                ['nip']), 
-            'education_level');
+        $edu = $this->getAggregateEducation($start, $end, $whereTrxID);
         $pas = $this->omniCount(
             $this->omniQuery(
                 ['graduate_status','nip'],
@@ -81,16 +73,16 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),         
+                ['nip']),
             'graduate_status');
         $org = $this->omniCount(
-            $this->omniQuery(                   
+            $this->omniQuery(
                 ['organization_name','nip'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']), 
+                ['nip']),
             'organization_name');
         $pri = $this->omniCount(
             $this->omniQuery(
@@ -140,7 +132,7 @@ class DashboardController extends Controller
                 $trxID,
             ],
             ['trx_start_date', [$start, $end]],
-            ['nip'] 
+            ['nip']
         );
 
         $now = time();
@@ -181,6 +173,67 @@ class DashboardController extends Controller
         ];
 
         return $tier;
+    }
+
+    private function getAggregateEducation($start, $end, $trxID)
+    {
+        // resulting row of objects
+        $query = $this->omniQuery(
+            ['trx_id','education_level','nip'],
+            [
+                $trxID,
+            ],
+            ['trx_start_date', [$start, $end]],
+            ['nip']
+        );
+
+        // group education
+        foreach($query as $row) {
+            $edu = $row->education_level;
+
+            $p1 = '/SMA|SMU|SMK|STM|SLTA|SLTU|SMIP|SMEA/i';
+            $p2 = '/DI|D1|D I|D 1/i';
+            $p3 = '/DII|D2|D II|D 2/i';
+            $p4 = '/DIII|D3|D III|D 3/i';
+            $p5 = '/DIV|D4|D IV|D 4/i';
+            $p6 = '/SI|S1|S I|S 1/i';
+            $p7 = '/SII|S2|S II|S 2/i';
+            $p8 = '/SIII|S3|S III|S 3/i';
+
+            if(preg_match($p1, $edu)) {
+                $e['SMA'][] = $edu;
+            } elseif(preg_match($p2, $edu)) {
+                $e['D I'][] = $edu;
+            } elseif(preg_match($p3, $edu)) {
+                $e['D II'][] = $edu;
+            } elseif(preg_match($p4, $edu)) {
+                $e['D III'][] = $edu;
+            } elseif(preg_match($p5, $edu)) {
+                $e['D IV'][] = $edu;
+            } elseif(preg_match($p6, $edu)) {
+                $e['S 1'][] = $edu;
+            } elseif(preg_match($p7, $edu)) {
+                $e['S 2'][] = $edu;
+            } elseif(preg_match($p8, $edu)) {
+                $e['S 3'][] = $edu;
+            } else {
+                $e['Lainnya'][] = $edu;
+            }
+
+        }
+
+        // count array
+        $c['SMA'] = !empty($e['SMA']) ? collect($e['SMA'])->count() : 0;
+        $c['D I'] = !empty($e['D I']) ? collect($e['D I'])->count() : 0;
+        $c['D II'] = !empty($e['D II']) ? collect($e['D II'])->count() : 0;
+        $c['D III'] = !empty($e['D III']) ? collect($e['D III'])->count() : 0;
+        $c['D IV'] = !empty($e['D IV']) ? collect($e['D IV'])->count() : 0;
+        $c['S 1'] = !empty($e['S 1']) ? collect($e['S 1'])->count() : 0;
+        $c['S 2'] = !empty($e['S 2']) ? collect($e['S 2'])->count() : 0;
+        $c['S 3'] = !empty($e['S 3']) ? collect($e['S 3'])->count() : 0;
+        $c['Lainnya'] = !empty($e['Lainnya']) ? collect($e['Lainnya'])->count() : 0;
+
+        return $c;
     }
 
     private function getAggregateEchelon($start, $end, $trxID)
@@ -241,7 +294,7 @@ class DashboardController extends Controller
                     ->whereBetween($betweenField[0],$betweenField[1])
                     ->distinct($distinctField)
                     ->get();
-        
+
         return $query;
     }
 
