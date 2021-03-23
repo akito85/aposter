@@ -217,13 +217,13 @@ class DashboardController extends Controller
             } elseif(preg_match($p8, $edu)) {
                 $e['S 3'][] = $edu;
             } else {
-                $e['Lainnya'][] = $edu;
+                $e[' Lainnya'][] = $edu;
             }
 
         }
 
         // count array
-        $c['SMA'] = !empty($e['SMA']) ? collect($e['SMA'])->count() : 0;
+        $c[' SMA'] = !empty($e[' SMA']) ? collect($e[' SMA'])->count() : 0;
         $c['D I'] = !empty($e['D I']) ? collect($e['D I'])->count() : 0;
         $c['D II'] = !empty($e['D II']) ? collect($e['D II'])->count() : 0;
         $c['D III'] = !empty($e['D III']) ? collect($e['D III'])->count() : 0;
@@ -231,7 +231,7 @@ class DashboardController extends Controller
         $c['S 1'] = !empty($e['S 1']) ? collect($e['S 1'])->count() : 0;
         $c['S 2'] = !empty($e['S 2']) ? collect($e['S 2'])->count() : 0;
         $c['S 3'] = !empty($e['S 3']) ? collect($e['S 3'])->count() : 0;
-        $c['Lainnya'] = !empty($e['Lainnya']) ? collect($e['Lainnya'])->count() : 0;
+        $c[' Lainnya'] = !empty($e[' Lainnya']) ? collect($e[' Lainnya'])->count() : 0;
 
         return $c;
     }
