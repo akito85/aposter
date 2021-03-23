@@ -25,10 +25,10 @@
 
                     <form>
                         <div class="form-group">
-                            <input id="periode" type="text" name="daterange" class="form-control">                
+                            <input id="periode" type="text" name="daterange" class="form-control">
                         </div>
-                    </form>                
-                    
+                    </form>
+
                     <select class="training-list form-control form-control-lg">
                         <option value="ALL">ALL</option>
                         @if($trainingList)
@@ -142,14 +142,14 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             {
                 data: values,
                 backgroundColor: [
-                    "#845ec2","#d65db1","#ff6f91","#ff9671","#ffc75f","#f9f871",
-                    "#1983E3", "#C2BA7D", "#E69C48", "#DA476B", "#231B34",
-                    "#E4DFC2", "#898B93", "#E1C871", "#AF3A70", "#251933",
-                    "#9DB669", "#C16EB5", "#EF2E6C", "#666D77", "#26292B",
+                    "#845ec2", "#d65db1", "#ff6f91", "#ff9671", "#ffc75f", "#9d0208",
+                    "#1983E3", "#C2BA7D", "#E69C48", "#DA476B", "#231B34", "#6a040f",
+                    "#898B93", "#E1C871", "#AF3A70", "#251933","#9DB669", "#C16EB5",
+                    "#EF2E6C", "#666D77", "#26292B",
                     // "#d8e2dc","#ffe5d9","#ffcad4","#f4acb7","#eae2b7",
                     // "#ffb5a7","#fcd5ce","#f8edeb","#f9dcc4","#fec89a",
-                    // "#03071e", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02",
-                    // "#e85d04", "#f48c06", "#f48c06", "#faa307", "#ffba08"
+                    // "#03071e", "#370617", "#9d0208", "#d00000", "#dc2f02",
+                    // "#f48c06", "#f48c06", "#faa307", "#ffba08"
                 ]
             }
         ]
@@ -179,6 +179,12 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             onComplete: function(animation) {
                 ctx.nextElementSibling.setAttribute("download", "{{ $training }}" + " - " + chartTitle);
                 ctx.nextElementSibling.setAttribute("href", this.toBase64Image());
+            }
+        },
+        scale: {
+            ticks: {
+                min: 0,
+                stepSize: 10
             }
         }
     };
