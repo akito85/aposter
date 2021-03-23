@@ -180,12 +180,6 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
                 ctx.nextElementSibling.setAttribute("download", "{{ $training }}" + " - " + chartTitle);
                 ctx.nextElementSibling.setAttribute("href", this.toBase64Image());
             }
-        },
-        scale: {
-            ticks: {
-                min: 0,
-                stepSize: 10
-            }
         }
     };
 
