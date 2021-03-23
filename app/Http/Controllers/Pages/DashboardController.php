@@ -216,10 +216,7 @@ class DashboardController extends Controller
                 $e['S 2'][] = $edu;
             } elseif(preg_match($p8, $edu)) {
                 $e['S 3'][] = $edu;
-            } else {
-                $e[' Lainnya'][] = $edu;
             }
-
         }
 
         // count array
@@ -231,7 +228,6 @@ class DashboardController extends Controller
         $c['S 1'] = !empty($e['S 1']) ? collect($e['S 1'])->count() : 0;
         $c['S 2'] = !empty($e['S 2']) ? collect($e['S 2'])->count() : 0;
         $c['S 3'] = !empty($e['S 3']) ? collect($e['S 3'])->count() : 0;
-        $c[' Lainnya'] = !empty($e[' Lainnya']) ? collect($e[' Lainnya'])->count() : 0;
 
         return $c;
     }
