@@ -171,9 +171,16 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    stepSize: 3
                 }
-            }]
+            }],
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    stepSize: 3
+                }
+            }],
         },
         plugins: {
             datalabels: {
