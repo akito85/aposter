@@ -168,6 +168,13 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         legend: {
             display: false,
         },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
         plugins: {
             datalabels: {
                 color: "#fff",
