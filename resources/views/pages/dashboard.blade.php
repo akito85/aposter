@@ -181,7 +181,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: chartSteps,
+                    // stepSize: chartSteps,
                     fontColor: "#000"
                 },
                 offset: true,
@@ -196,7 +196,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
             xAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: chartSteps,
+                    // stepSize: chartSteps,
                     fontColor: "#000"
                 },
                 offset: true,
@@ -237,10 +237,10 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
         options: options
     });
 }
-var thePath = window.location.pathname;
-    thePath = thePath.substring(thePath.lastIndexOf('/') + 1);
+// var thePath = window.location.pathname;
+//     thePath = thePath.substring(thePath.lastIndexOf('/') + 1);
 
-var steps = (thePath == "ALL") ? 200 : 3;
+// var steps = (thePath == "ALL") ? 200 : 3;
 
     initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`, steps);
     initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`, steps);
