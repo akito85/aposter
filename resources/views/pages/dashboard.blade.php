@@ -164,17 +164,17 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
             text: chartTitle,
             fontSize: 17,
             fontColor: "#111",
-            // padding: 33 
+            padding: 29 
         },
         legend: {
             display: false,
         },
         layout: {
             padding: {
-                left: 33,
+                left: 3,
                 right: 33,
-                top: 19,
-                bottom: 19
+                top: 3,
+                bottom: 3
             }
         },
         scales: {         
@@ -217,7 +217,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
                 clamp: true,
                 font: {
                     weight: "bold",
-                    size: 13
+                    size: 12
                 }
             }
         },
