@@ -164,7 +164,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
             text: chartTitle,
             fontSize: 17,
             fontColor: "#111",
-            padding: 33 
+            // padding: 33 
         },
         legend: {
             display: false,
