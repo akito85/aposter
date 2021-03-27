@@ -124,7 +124,7 @@
 
 @section('custom_js')
 <script>
-function initiateChart(chartElement, chartType, chartTitle, chartData) {
+function initiateChart(chartElement, chartType, chartTitle, chartData, chartSteps) {
     // get the chart canvas
     var cData = JSON.parse(chartData);
     var ctx = document.getElementById(chartElement);
@@ -163,30 +163,62 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
             position: "top",
             text: chartTitle,
             fontSize: 17,
-            fontColor: "#111"
+            fontColor: "#111",
+            padding: 33 
         },
         legend: {
             display: false,
         },
-        scales: {
+        layout: {
+            padding: {
+                left: 33,
+                right: 33,
+                top: 19,
+                bottom: 19
+            }
+        },
+        scales: {         
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 3
-                }
+                    stepSize: chartSteps,
+                    fontColor: "#000"
+                },
+                offset: true,
+                gridLines: {
+                    offsetGridLines: false
+                },
+                scaleLabel: {
+                    fontColor: "#000",
+                    fontSize: 13
+                }                                        
             }],
             xAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 3
-                }
+                    stepSize: chartSteps,
+                    fontColor: "#000"
+                },
+                offset: true,
+                gridLines: {
+                    offsetGridLines: false
+                },
+                scaleLabel: {
+                    fontColor: "#000",
+                    fontSize: 13
+                }                     
             }],
         },
         plugins: {
             datalabels: {
-                color: "#fff",
-                anchor: "center",
-                clamp: true
+                color: "#000",
+                anchor:"end",
+                align: "end",
+                clamp: true,
+                font: {
+                    weight: "bold",
+                    size: 13
+                }
             }
         },
         animation: {
@@ -205,15 +237,18 @@ function initiateChart(chartElement, chartType, chartTitle, chartData) {
         options: options
     });
 }
-if(window.location.pathname != "/") {
-    initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`);
-    initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`);
-    initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`);
-    initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`);
-    initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`);
-    initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`);
-    initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`);
-}
+var thePath = window.location.pathname;
+    thePath = thePath.substring(thePath.lastIndexOf('/') + 1);
+
+var steps = (thePath == "ALL") ? 200 : 3;
+
+    initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`, steps);
+    initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`, steps);
+    initiateChart("chart-age", "bar", "Peserta Berdasarkan Umur", `<?php echo $age; ?>`, steps);
+    initiateChart("chart-rc", "horizontalBar", "Peserta Berdasarkan Pangkat / Golongan", `<?php echo $rc; ?>`, steps);
+    initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`, steps);
+    initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`, steps);
+    initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`, steps);
 
 $(".training-list").select2();
 
