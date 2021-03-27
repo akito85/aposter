@@ -241,6 +241,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
 //     thePath = thePath.substring(thePath.lastIndexOf('/') + 1);
 
 // var steps = (thePath == "ALL") ? 200 : 3;
+var steps;
 
     initiateChart("chart-gender", "bar", "Peserta Berdasarkan Gender", `<?php echo $gender; ?>`, steps);
     initiateChart("chart-main-unit", "horizontalBar", "Peserta Berdasarkan Unit Utama Kerja (ES I)", `<?php echo $main_unit; ?>`, steps);
