@@ -11,6 +11,9 @@
         color: #ffffff !important;
     }
     .select2-container {max-height: 41px;}
+    .card .card-body {
+        height: 800px;
+    }
 @endsection
 
 @section('content')
@@ -164,7 +167,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
             text: chartTitle,
             fontSize: 17,
             fontColor: "#111",
-            padding: 29 
+            padding: 29GIT 
         },
         legend: {
             display: false,
