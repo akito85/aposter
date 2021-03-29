@@ -161,6 +161,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
     //options
     var options = {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
             display: true,
             position: "top",
