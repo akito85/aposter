@@ -35,9 +35,17 @@ class UploadController extends Controller
 
     public function fileUploadResults(UploadResultsRequest $request)
     {
+        $logFilename = UploadLogModel::where('filename', $this->changeFileName($rawfile));
+        $trxFilename = DB::table('trx_results')->where('filename', $this->changeFileName($rawfile));
+
         $rawfile = $request->file('data_results');
         $records = $this->csvToArray($rawfile);
         $row = [];
+
+        if(!empty($serchFIle) && !empty($trxFilename)) {
+            $logFilename->delete();
+            $trxFilename->delete();
+        }
 
         foreach($records as $record) {
             $row = [
