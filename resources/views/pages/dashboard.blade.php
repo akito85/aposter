@@ -11,8 +11,8 @@
         color: #ffffff !important;
     }
     .select2-container {max-height: 41px;}
-    .card .card-body {
-        height: 800px;
+    canvas {
+        height: 666px !important;
     }
 @endsection
 
