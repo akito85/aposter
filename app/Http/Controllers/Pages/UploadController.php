@@ -119,7 +119,7 @@ class UploadController extends Controller
 
         $header = null;
         $data = [];
-        $delimiter = $this->csvDelimCheck($filename);
+        $delimiter = ',';
 
         if (($handle = fopen($filename, 'r')) !== false)
         {
