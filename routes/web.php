@@ -23,5 +23,6 @@ Route::get('/upload', 'Pages\UploadController@index')->name('upload');
 
 Route::post('/fileUploadParticipants', 'Pages\UploadController@fileUploadParticipants')->name('file-participants');
 Route::post('/fileUploadResults', 'Pages\UploadController@fileUploadResults')->name('file-results');
+Route::post('/deleteUploadRecords', 'Pages\UploadController@deleteUploadRecords')->name('delete-records');
 
 Route::get('/checkTrainings', 'SyncTrainingsController@index')->name('check-trainings');

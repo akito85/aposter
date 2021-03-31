@@ -7,7 +7,12 @@
 <br>
 <div class="container-fluid">
 
-    <div>{{ isset($success) ? $success : '' }}</div>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card shadow mb-4">
@@ -48,18 +53,36 @@
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nama File</th>
-                        <!-- <th>Nama Diklat</th> -->
+                        <th>Jumlah Data</th>
                         <th>Pengunggah</th>
                         <th>Waktu Penambahan</th>
                         <th>Waktu Pengubahan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($logs as $log)
+                    @foreach ($logs['log'] as $log)
                     <tr>
+                        <td>
+                        <a href="{{ secure_url('deleteUploadRecords') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('delete-form').submit();">
+                            Delete
+                        </a>
+
+                        <form id="delete-form" 
+                            action="{{ secure_url('deleteUploadRecords') }}" 
+                            method="POST" 
+                            style="display: none;">
+                            @csrf
+                            <input type="hidden" 
+                                name="filename" 
+                                value="{{ $log->file_name }}">
+                        </form>                        
+                        </td>
                         <td>{{ $log->file_name }}</td>
-                        <!-- <td>{{ $log->training_name }}</td> -->
+                        <td>{{ $logs['count'][$loop->index]->rows  }}</td>
                         <td>{{ $log->uploader_name }}</td>
                         <td>{{ $log->created_at }}</td>
                         <td>{{ $log->updated_at }}</td>

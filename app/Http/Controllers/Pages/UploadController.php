@@ -78,12 +78,35 @@ class UploadController extends Controller
         return redirect('upload')->with('status', 'Successfully uploaded!');
     }
 
+    public function deleteUploadRecords(Request $request)
+    {
+        $logFilename = UploadLogModel::where('file_name', $request->filename)->delete();
+        $trxFilename = DB::table('trx_results')
+            ->where('filename', $request->filename)
+            ->delete();
+
+        return redirect('upload')->with('status', 'Successfully deleted!');
+    }
+
     private function listUploadLog()
     {
-        return UploadLogModel::select('*')
+        $count = DB::table('trx_results')
+            ->select(DB::raw("COUNT(*) as rows, MAX(created_at) as cr_at"))
+            ->orderBy('cr_at', 'desc')
+            ->groupBy('filename')
+            ->get();
+
+        $log = UploadLogModel::select('*')
                     ->limit(11)
                     ->orderBy('created_at', 'desc')
                     ->get();
+
+        $logs =  [
+            'log' => $log,
+            'count' => $count
+        ];
+
+        return $logs;
     }
 
     private function saveUploadLog($file, $title, $year, $email)
