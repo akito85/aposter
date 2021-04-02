@@ -164,7 +164,7 @@ class DashboardController extends Controller
 
 
         $tier = [
-            '< 20' => $tier1,
+            ' < 20' => $tier1,
             '20 - 29' => $tier2,
             '30 - 39' => $tier3,
             '40 - 49' => $tier4,
