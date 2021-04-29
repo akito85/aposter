@@ -266,9 +266,9 @@ class DashboardController extends Controller
         $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
         $p2 = '/kepala wilayah|kepala pusat/i';
         $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
-        $p4 = '/kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
+        $p4 = '/^pembina|kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
         $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
-        $p6 = '/muda|pertama|madya|utama|widyaiswara|fungsional/i';
+        $p6 = '/widyaiswara|fungsional/i';
 
         // group echelon
         foreach($query as $row) {
