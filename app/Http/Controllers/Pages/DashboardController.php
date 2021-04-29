@@ -213,7 +213,9 @@ class DashboardController extends Controller
             $p8 = '/^SIII|^S3|^S III|^S 3/i';
 
             if(preg_match($p1, $edu)) {
-                $e['SMA'][] = $edu;
+                if($edu == 'SMA' or $edu == 'SMU' or $edu == 'STM' or $edu == 'SMK' or $edu == 'SMIP' or $edu == 'SMEA' or $edu == 'SLTA' or $edu == 'SLTU' or $edu == 'SMAK') {
+                    $e['SMA'][] = $edu;
+                }
             }
             if(preg_match($p2, $edu)) {
                 if($edu == 'D I' or $edu == 'DI' or $edu == 'D1' or $edu == 'D 1') {
