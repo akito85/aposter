@@ -191,14 +191,14 @@ class DashboardController extends Controller
         foreach($query as $row) {
             $edu = $row->education_level;
 
-            $p1 = '/SMA|SMU|SMK|STM|SLTA|SLTU|SMIP|SMEA/i';
-            $p2 = '/DI|D1|D I|D 1/i';
-            $p3 = '/DII|D2|D II|D 2/i';
-            $p4 = '/DIII|D3|D III|D 3/i';
-            $p5 = '/DIV|D4|D IV|D 4/i';
-            $p6 = '/SI|S1|S I|S 1/i';
-            $p7 = '/SII|S2|S II|S 2/i';
-            $p8 = '/SIII|S3|S III|S 3/i';
+            $p1 = '/^SMA|^SMU|^SMK|^STM|^SLTA|^SLTU|^SMIP|^SMEA/i';
+            $p2 = '/^DI|^D1|^D I|^D 1/i';
+            $p3 = '/^DII|^D2|^D II|^D 2/i';
+            $p4 = '/^DIII|^D3|^D III|^D 3/i';
+            $p5 = '/^DIV|^D4|^D IV|^D 4/i';
+            $p6 = '/^SI|^S1|^S I|^S 1/i';
+            $p7 = '/^SII|^S2|^S II|^S 2/i';
+            $p8 = '/^SIII|^S3|^S III|^S 3/i';
 
             if(preg_match($p1, $edu)) {
                 $e['SMA'][] = $edu;
@@ -216,6 +216,8 @@ class DashboardController extends Controller
                 $e['S 2'][] = $edu;
             } elseif(preg_match($p8, $edu)) {
                 $e['S 3'][] = $edu;
+            } else {
+                $e['Tidak Diisi'][] = $edu;
             }
         }
 
@@ -228,6 +230,7 @@ class DashboardController extends Controller
         $c['S 1'] = !empty($e['S 1']) ? collect($e['S 1'])->count() : 0;
         $c['S 2'] = !empty($e['S 2']) ? collect($e['S 2'])->count() : 0;
         $c['S 3'] = !empty($e['S 3']) ? collect($e['S 3'])->count() : 0;
+        $c['Tidak Diisi'] = !empty($e['Tidak Diisi']) ? collect($e['Tidak Diisi'])->count() : 0;
 
         return $c;
     }
@@ -250,6 +253,7 @@ class DashboardController extends Controller
         $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
         $p4 = '/kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
         $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
+        $p6 = '/muda|pertama|madya|utama|widyaiswara|/i';
 
         // group echelon
         foreach($query as $row) {
@@ -265,8 +269,10 @@ class DashboardController extends Controller
                 $e['Eselon IV'][] = $position;
             } elseif(preg_match($p5, $position)) {
                 $e['Pelaksana'][] = $position;
-            } else {
+            } elseif(preg_match($p6, $position)) {
                 $e['Fungsional'][] = $position;
+            } else {
+                $e['Tidak Diisi'][] = $position;
             }
         }
 
@@ -277,6 +283,7 @@ class DashboardController extends Controller
         $c['Eselon IV'] = !empty($e['Eselon IV']) ? collect($e['Eselon IV'])->count() : 0;
         $c['Pelaksana'] = !empty($e['Pelaksana']) ? collect($e['Pelaksana'])->count() : 0;
         $c['Fungsional'] = !empty($e['Fungsional']) ? collect($e['Fungsional'])->count() : 0;
+        $c['Tidak Diisi'] = !empty($e['Tidak Diisi']) ? collect($e['Tidak Diisi'])->count() : 0;
 
         return $c;
     }
