@@ -121,6 +121,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chart-position"></canvas>
+                    <a href="javascript:void(0)" class="btn btn-primary chart-pass">Unduh Diagram</a>
+                    <a href="javascript:void(0)" class="btn btn-primary data-pass">Lihat Data</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -181,7 +190,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
                 bottom: 3
             }
         },
-        scales: {         
+        scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
@@ -195,7 +204,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
                 scaleLabel: {
                     fontColor: "#000",
                     fontSize: 13
-                }                                        
+                }
             }],
             xAxes: [{
                 ticks: {
@@ -210,7 +219,7 @@ function initiateChart(chartElement, chartType, chartTitle, chartData, chartStep
                 scaleLabel: {
                     fontColor: "#000",
                     fontSize: 13
-                }                     
+                }
             }],
         },
         plugins: {
@@ -254,6 +263,7 @@ var steps;
     initiateChart("chart-education", "bar", "Peserta Berdasarkan Pendidikan", `<?php echo $education; ?>`, steps);
     initiateChart("chart-echelon", "bar", "Peserta Berdasarkan Jenjang", `<?php echo $echelon; ?>`, steps);
     initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`, steps);
+    initiateChart("chart-position", "horizontalBar", "Peserta Deskripsi Jabatan", `<?php echo $positionDesc; ?>`, steps);
 
 $(".training-list").select2();
 

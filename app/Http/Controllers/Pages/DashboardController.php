@@ -102,7 +102,15 @@ class DashboardController extends Controller
                 ['trx_start_date', [$start, $end]],
                 ['nip']),
             'eselon2');
-
+        $des = $this->omniCount(
+            $this->omniQuery(
+                ['position_desc','nip'],
+                [
+                    $whereTrxID,
+                ],
+                ['trx_start_date', [$start, $end]],
+                ['nip']),
+            'position_desc');
 
         $data = [
             'training' => $trxID,
@@ -112,6 +120,7 @@ class DashboardController extends Controller
             'education' => json_encode($edu),
             'echelon' => json_encode($ech),
             'pass' => json_encode($pas),
+            'positionDesc' => json_encode($des),
             'trainingList' => $trx,
             'organizations' => $org,
             'main_unit' => json_encode($pri),
