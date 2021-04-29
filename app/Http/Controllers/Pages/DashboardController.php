@@ -276,17 +276,23 @@ class DashboardController extends Controller
 
             if(preg_match($p1, $position)) {
                 $e['Eselon I'][] = $position;
-            } elseif(preg_match($p2, $position)) {
+            }
+            if(preg_match($p2, $position)) {
                 $e['Eselon II'][] = $position;
-            } elseif(preg_match($p3, $position)) {
+            }
+            if(preg_match($p3, $position)) {
                 $e['Eselon III'][] = $position;
-            } elseif(preg_match($p4, $position)) {
+            }
+            if(preg_match($p4, $position)) {
                 $e['Eselon IV'][] = $position;
-            } elseif(preg_match($p5, $position)) {
+            }
+            if(preg_match($p5, $position)) {
                 $e['Pelaksana'][] = $position;
-            } elseif(preg_match($p6, $position)) {
+            }
+            if(preg_match($p6, $position)) {
                 $e['Fungsional'][] = $position;
-            } else {
+            }
+            if(empty($edu) or $edu == 'Tidak Diisi') {
                 $e['Tidak Diisi'][] = $position;
             }
         }
