@@ -212,7 +212,9 @@ class DashboardController extends Controller
                 }
             }
             if(preg_match($p3, $edu)) {
-                $e['D II'][] = $edu;
+                if($edu == 'D II' or $edu == 'DII' or $edu == 'D2' or $edu == 'D 2') {
+                    $e['D II'][] = $edu;
+                }
             }
             if(preg_match($p4, $edu)) {
                 $e['D III'][] = $edu;
