@@ -268,7 +268,7 @@ class DashboardController extends Controller
         $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
         $p4 = '/^pembina|kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
         $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
-        $p6 = '/auditor muda|auditor madya|auditor pertama|widyaiswara|fungsional/i';
+        $p6 = '/auditor muda|auditor madya|auditor pertama|widyaiswara/i';
 
         // group echelon
         foreach($query as $row) {
@@ -292,7 +292,7 @@ class DashboardController extends Controller
             if(preg_match($p6, $position)) {
                 $e['Fungsional'][] = $position;
             }
-            if(empty($edu) or $edu == 'Tidak Diisi') {
+            if(empty($position) or $position == 'Tidak Diisi') {
                 $e['Tidak Diisi'][] = $position;
             }
         }
