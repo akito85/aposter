@@ -205,23 +205,31 @@ class DashboardController extends Controller
 
             if(preg_match($p1, $edu)) {
                 $e['SMA'][] = $edu;
-            } elseif(preg_match($p2, $edu)) {
+            }
+            if(preg_match($p2, $edu)) {
                 if($edu == 'D I' or $edu == 'DI' or $edu == 'D1' or $edu == 'D 1') {
                     $e['D I'][] = $edu;
                 }
-            } elseif(preg_match($p3, $edu)) {
+            }
+            if(preg_match($p3, $edu)) {
                 $e['D II'][] = $edu;
-            } elseif(preg_match($p4, $edu)) {
+            }
+            if(preg_match($p4, $edu)) {
                 $e['D III'][] = $edu;
-            } elseif(preg_match($p5, $edu)) {
+            }
+            if(preg_match($p5, $edu)) {
                 $e['D IV'][] = $edu;
-            } elseif(preg_match($p6, $edu)) {
+            }
+            if(preg_match($p6, $edu)) {
                 $e['S 1'][] = $edu;
-            } elseif(preg_match($p7, $edu)) {
+            }
+            if(preg_match($p7, $edu)) {
                 $e['S 2'][] = $edu;
-            } elseif(preg_match($p8, $edu)) {
+            }
+            if(preg_match($p8, $edu)) {
                 $e['S 3'][] = $edu;
-            } else {
+            }
+            if(empty($edu) or $edu == 'Tidak Diisi') {
                 $e['Tidak Diisi'][] = $edu;
             }
         }
