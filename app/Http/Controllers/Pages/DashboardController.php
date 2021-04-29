@@ -203,7 +203,9 @@ class DashboardController extends Controller
             if(preg_match($p1, $edu)) {
                 $e['SMA'][] = $edu;
             } elseif(preg_match($p2, $edu)) {
-                $e['D I'][] = $edu;
+                if($edu != 'D IV' || $edu != 'DIV' || $edu != 'D 4' || $edu != 'D4') {
+                    $e['D I'][] = $edu;
+                }
             } elseif(preg_match($p3, $edu)) {
                 $e['D II'][] = $edu;
             } elseif(preg_match($p4, $edu)) {
@@ -253,7 +255,7 @@ class DashboardController extends Controller
         $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
         $p4 = '/kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
         $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
-        $p6 = '/muda|pertama|madya|utama|widyaiswara|/i';
+        $p6 = '/muda|pertama|madya|utama|widyaiswara|fungsional/i';
 
         // group echelon
         foreach($query as $row) {
