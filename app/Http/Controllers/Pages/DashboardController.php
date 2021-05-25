@@ -276,7 +276,7 @@ class DashboardController extends Controller
         // pattern echelons
         $p1 = '/dirjen|direkotrat jenderal|sekdir|sekretaris direktorat|kaban|kepala badan/i';
         $p2 = '/kepala wilayah|kepala pusat/i';
-        $p3 = '/kabid|kepala bidag|kabag|kepala bagian/i';
+        $p3 = '/kabid|kepala bidang|kabag|kepala bagian/i';
         $p4 = '/^pembina|kasubbid|kepala subbidang|kasubbag|kepala subbagian|kasi|kepala seksi|kepala subdirektorat|kasubdir|kasubdit|kepala subdir|kepala subdit/i';
         $p5 = '/^pelaksana|penata|penyaji|pengatur|^pengolah/i';
         $p6 = '/auditor muda|auditor madya|auditor pertama|widyaiswara|analis|juru sita|jabatan fungsional|jf|analis|akpd/i';
