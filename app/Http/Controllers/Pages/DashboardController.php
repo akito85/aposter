@@ -135,7 +135,7 @@ class DashboardController extends Controller
         }
         else
         {
-            $evagara = json_encode([]);
+            $evagara = '';
         }
 
         $data = [
