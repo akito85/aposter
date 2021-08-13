@@ -54,7 +54,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'gender');
         $cls = $this->omniCount(
             $this->omniQuery(
@@ -63,7 +63,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'rank_class');
         $edu = $this->getAggregateEducation($start, $end, $whereTrxID);
         $pas = $this->omniCount(
@@ -73,7 +73,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'graduate_status');
         $org = $this->omniCount(
             $this->omniQuery(
@@ -82,7 +82,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'organization_name');
         $pri = $this->omniCount(
             $this->omniQuery(
@@ -91,7 +91,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'main_unit');
         $sec = $this->omniCount(
             $this->omniQuery(
@@ -100,7 +100,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'eselon2');
         $des = $this->omniCount(
             $this->omniQuery(
@@ -109,7 +109,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                ['']),
             'position_desc');
 
         $data = [
@@ -327,7 +327,7 @@ class DashboardController extends Controller
                     ->select($selectField)
                     ->where($whereField)
                     ->whereBetween($betweenField[0],$betweenField[1])
-                    ->distinct($distinctField)
+                    //->distinct($distinctField)
                     ->get();
 
         return $query;
