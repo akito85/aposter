@@ -145,6 +145,13 @@ class DashboardController extends Controller
             $evagara = json_encode([0]);
         }
 
+        $mainUnitList = $this->omniCount(DB::table('trx_results')
+            ->select(['main_unit', 'nip'])
+            ->whereRAW('LOWER(main_unit) LIKE ?', ["%{$trxID}%"])
+            ->whereBetween('trx_start_date', [$start, $end])
+            ->distinct('nip')
+            ->get(), 'main_unit');
+
         $data = [
             'evagara' => $evagara,
             'training' => $trxID,
@@ -156,6 +163,7 @@ class DashboardController extends Controller
             'pass' => json_encode($pas),
             'positionDesc' => json_encode($des),
             'trainingList' => $trx,
+            'mainUnitList' => json_encode($mainUnitList),
             'organizations' => $org,
             'main_unit' => json_encode($pri),
             'sub_unit' => json_encode($sec),
