@@ -130,6 +130,8 @@ class DashboardController extends Controller
                         ->whereRAW('LOWER(trx_name) LIKE ?', ["%{$q}%"])
                         ->where('trx_date', 'like', '%' . date_format($date,"y") . '%')
                         ->get();
+
+            $evagara = json_encode($evagara[0]->payload);
         }
         else
         {
@@ -137,7 +139,7 @@ class DashboardController extends Controller
         }
 
         $data = [
-            'evagara' => json_encode($evagara[0]->payload),
+            'evagara' => $evagara ,
             'training' => $trxID,
             'gender' => json_encode($sex),
             'age' => json_encode($age),
