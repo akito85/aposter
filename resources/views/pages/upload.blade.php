@@ -28,7 +28,7 @@
                         @csrf
                         <div class="form-group">
                             <input type="file" id="data_results" class="custom-file-input" name="data_results">
-                            <label class="custom-file-label" for="data_results" aria-describedby="file-label-data">Choose file</label>
+                            <label class="custom-file-label" for="data_results" aria-describedby="file-label-data">Choose file CSV ONLY</label>
                         </div>
                         <br><br>
                         <div class="row">
@@ -67,19 +67,19 @@
                         <td>
                         <a href="{{ secure_url('deleteUploadRecords') }}"
                             onclick="event.preventDefault();
-                                            document.getElementById('delete-form').submit();">
+                                            document.getElementById('delete-form_{{ $log->file_name }}').submit();">
                             Delete
                         </a>
 
-                        <form id="delete-form" 
-                            action="{{ secure_url('deleteUploadRecords') }}" 
-                            method="POST" 
+                        <form id="delete-form_{{ $log->file_name }}"
+                            action="{{ secure_url('deleteUploadRecords') }}"
+                            method="POST"
                             style="display: none;">
                             @csrf
-                            <input type="hidden" 
-                                name="filename" 
+                            <input type="hidden"
+                                name="filename"
                                 value="{{ $log->file_name }}">
-                        </form>                        
+                        </form>
                         </td>
                         <td>{{ $log->file_name }}</td>
                         <td>{{ $logs['count'][$loop->index]->rows  }}</td>
