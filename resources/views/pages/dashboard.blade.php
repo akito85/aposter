@@ -303,7 +303,7 @@ var steps;
     initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`, steps);
     initiateChart("chart-position", "horizontalBar", "Peserta Deskripsi Jabatan", `<?php echo $positionDesc; ?>`, steps);
 
-var x = <?php echo empty($evagara) ? [0] : $evagara; ?>;
+var x = <?php echo $evagara; ?>;
 
 if(x !== undefined || x.length != 0 || x !== "") {
     x = JSON.parse(x);

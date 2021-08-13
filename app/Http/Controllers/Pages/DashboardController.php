@@ -135,7 +135,7 @@ class DashboardController extends Controller
         }
         else
         {
-            $evagara = '';
+            $evagara = [0];
         }
 
         $data = [
