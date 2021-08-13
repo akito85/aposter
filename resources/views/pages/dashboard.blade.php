@@ -303,51 +303,53 @@ var steps;
     initiateChart("chart-pass", "horizontalBar", "Peserta Berdasarkan Kelulusan", `<?php echo $pass; ?>`, steps);
     initiateChart("chart-position", "horizontalBar", "Peserta Deskripsi Jabatan", `<?php echo $positionDesc; ?>`, steps);
 
-var x = <?php echo empty($evagara) ? '""' : $evagara; ?>;
+var x = <?php echo empty($evagara) ? [0] : $evagara; ?>;
 
 if(x !== undefined || x.length != 0 || x !== "") {
     x = JSON.parse(x);
 
-    var ctxEvagara = document.getElementById('chart-evagara');
-    var chartEvagara = new Chart(ctxEvagara, {
-    type: 'bar',
-    data: {
-        labels: [
-                    ["Kesesuaian materi", "pembelajaran dengan", "harapan kebutuhan peserta"],
-                    ["Bahan ajar mudah", "dipahami"],
-                    ["Kesesuaian metode", "pembelajaran", "dengan materi", "Pelatihan Jarak Jauh"],
-                    ["Ketercukupan waktu", "penyelenggaraan", "Pelatihan Jarak Jauh dengan", "jumlah materi yang diberikan"],
-                    ["Kesigapan penyelenggara", "dalam melayani", "peserta selama proses", "Pelatihan Jarak Jauh"],
-                    ["Ketercukupan waktu dalam ", "mengerjakan penugasan,", "kuis, atau ujian"],
-                    ["Fasilitas PJJ", "mudah diakses"],
-                    ["Fasilitas PJJ", "mudah digunakan"]
-                ],
-        datasets: [
-            {
-                label: 'Kenyataan Pelatihan',
-                data: x.x.x,
-                backgroundColor: "#f4acb7"
-            },
-            {
-                label: 'Harapan Peserta',
-                data: x.y.y,
-                backgroundColor: "#eae2b7"
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-        legend: {
-            position: 'top',
+    if(x > 0) {
+        var ctxEvagara = document.getElementById('chart-evagara');
+        var chartEvagara = new Chart(ctxEvagara, {
+        type: 'bar',
+        data: {
+            labels: [
+                        ["Kesesuaian materi", "pembelajaran dengan", "harapan kebutuhan peserta"],
+                        ["Bahan ajar mudah", "dipahami"],
+                        ["Kesesuaian metode", "pembelajaran", "dengan materi", "Pelatihan Jarak Jauh"],
+                        ["Ketercukupan waktu", "penyelenggaraan", "Pelatihan Jarak Jauh dengan", "jumlah materi yang diberikan"],
+                        ["Kesigapan penyelenggara", "dalam melayani", "peserta selama proses", "Pelatihan Jarak Jauh"],
+                        ["Ketercukupan waktu dalam ", "mengerjakan penugasan,", "kuis, atau ujian"],
+                        ["Fasilitas PJJ", "mudah diakses"],
+                        ["Fasilitas PJJ", "mudah digunakan"]
+                    ],
+            datasets: [
+                {
+                    label: 'Kenyataan Pelatihan',
+                    data: x.x.x,
+                    backgroundColor: "#f4acb7"
+                },
+                {
+                    label: 'Harapan Peserta',
+                    data: x.y.y,
+                    backgroundColor: "#eae2b7"
+                }
+            ]
         },
-        title: {
-            display: true,
-            text: 'EVALUASI PENYELENGGARA'
-        }
-        }
-    },
-    });
+        options: {
+            responsive: true,
+            plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'EVALUASI PENYELENGGARA'
+            }
+            }
+        },
+        });
+    }
 }
 
 $(".training-list").select2();
