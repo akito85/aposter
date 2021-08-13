@@ -308,7 +308,7 @@ var x = <?php echo $evagara; ?>;
 if(x !== undefined || x.length != 0 || x !== "") {
     x = JSON.parse(x);
 
-    if(x > 0) {
+    if(x != 0) {
         var ctxEvagara = document.getElementById('chart-evagara');
         var chartEvagara = new Chart(ctxEvagara, {
         type: 'bar',
