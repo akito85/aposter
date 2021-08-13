@@ -112,7 +112,32 @@ class DashboardController extends Controller
                 ['nip']),
             'position_desc');
 
+        $trxn = $this->omniQuery(
+            ['trx_id', 'trx_name'],
+            [
+                $whereTrxID,
+            ],
+            ['trx_start_date', [$start, $end]],
+            ['trx_id']
+        );
+
+        if(isset($trxn[0]->trx_name))
+        {
+            $q = trim(strtolower($trxn[0]->trx_name));
+            $date = date_create($start);
+            $evagara = DB::table('trx_results_evagara')
+                        ->select('payload')
+                        ->whereRAW('LOWER(trx_name) LIKE ?', ["%{$q}%"])
+                        ->where('trx_date', 'like', '%' . date_format($date,"y") . '%')
+                        ->get();
+        }
+        else
+        {
+            $evagara = [];
+        }
+
         $data = [
+            'evagara' => json_encode($evagara[0]->payload),
             'training' => $trxID,
             'gender' => json_encode($sex),
             'age' => json_encode($age),

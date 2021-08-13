@@ -42,6 +42,16 @@
                         <p>Upload</p>
                     </a>
                 </li>
+                @if(Route::currentRouteName() == 'uploadEvagara')
+                <li class="nav-item active">
+                @else
+                <li class="nav-item">
+                @endif
+                    <a class="nav-link" href="/uploadEvagara">
+                        <i class="nc-icon nc-share-66"></i>
+                        <p>Upload Evagara</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ secure_url('logout') }}"
                         onclick="event.preventDefault();
