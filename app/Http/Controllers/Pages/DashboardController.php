@@ -135,11 +135,11 @@ class DashboardController extends Controller
         }
         else
         {
-            $evagara = [];
+            $evagara = '';
         }
 
         $data = [
-            'evagara' => $evagara ,
+            'evagara' => $evagara,
             'training' => $trxID,
             'gender' => json_encode($sex),
             'age' => json_encode($age),
