@@ -54,62 +54,62 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'gender');
         $cls = $this->omniCount(
             $this->omniQuery(
-                ['rank_class','nip'],
+                ['rank_class','nip', 'trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'rank_class');
         $edu = $this->getAggregateEducation($start, $end, $whereTrxID);
         $pas = $this->omniCount(
             $this->omniQuery(
-                ['graduate_status','nip'],
+                ['graduate_status','nip','trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'graduate_status');
         $org = $this->omniCount(
             $this->omniQuery(
-                ['organization_name','nip'],
+                ['organization_name','nip', 'trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'organization_name');
         $pri = $this->omniCount(
             $this->omniQuery(
-                ['main_unit','nip'],
+                ['main_unit','nip','trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'main_unit');
         $sec = $this->omniCount(
             $this->omniQuery(
-                ['eselon2','nip'],
+                ['eselon2','nip', 'trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'eselon2');
         $des = $this->omniCount(
             $this->omniQuery(
-                ['position_desc','nip'],
+                ['position_desc','nip', 'trx_id'],
                 [
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['']),
+                ['trx_id']),
             'position_desc');
 
         $data = [
@@ -327,7 +327,7 @@ class DashboardController extends Controller
                     ->select($selectField)
                     ->where($whereField)
                     ->whereBetween($betweenField[0],$betweenField[1])
-                    //->distinct($distinctField)
+                    ->distinct($distinctField)
                     ->get();
 
         return $query;
