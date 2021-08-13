@@ -131,7 +131,14 @@ class DashboardController extends Controller
                         ->where('trx_date', 'like', '%' . date_format($date,"y") . '%')
                         ->get();
 
-            $evagara = json_encode($evagara[0]->payload);
+            if(!empty($evagara[0]))
+            {
+                $evagara = json_encode($evagara[0]->payload);
+            }
+            else
+            {
+                $evagara = json_encode([0]);
+            }
         }
         else
         {
