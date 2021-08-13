@@ -22,16 +22,22 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-3 col-md-12 col-sm-12">
             <div class="card mt-3 mb-1">
                 <div class="card-body">
-
+                    <label>Periode</label>
                     <form>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 0;">
                             <input id="periode" type="text" name="daterange" class="form-control">
                         </div>
                     </form>
-
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12">
+            <div class="card mt-3 mb-1">
+                <div class="card-body">
+                    <label>Filter By Pelatihan</label>
                     <select class="training-list form-control form-control-lg">
                         <option value="ALL">ALL</option>
                         @if($trainingList)
@@ -47,6 +53,27 @@
                 </div>
             </div>
         </div>
+        <!--
+        <div class="col-lg-3 col-md-12 col-sm-12">
+            <div class="card mt-3 mb-1">
+                <div class="card-body">
+                    <label>Filter By Kementerian / Unit / Badan</label>
+                    <select class="training-list form-control form-control-lg">
+                        <option value="ALL">ALL</option>
+                        @if($trainingList)
+                            @foreach ($trainingList as $tl)
+                                @if (trim($tl->trx_id) == $training)
+                                <option value="{{ trim($tl->trx_id) }}" selected>{{ trim($tl->trx_name) }}</option>
+                                @else
+                                <option value="{{ trim($tl->trx_id) }}">{{ trim($tl->trx_name) }}</option>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+        -->
     </div>
 
     <br>
