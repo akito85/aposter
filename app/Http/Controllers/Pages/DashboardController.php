@@ -82,7 +82,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['nip']),
             'organization_name');
         $pri = $this->omniCount(
             $this->omniQuery(
@@ -91,7 +91,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['main_unit']),
+                ['nip']),
             'main_unit');
         $sec = $this->omniCount(
             $this->omniQuery(
