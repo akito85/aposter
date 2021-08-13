@@ -91,7 +91,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['nip']),
+                []),
             'main_unit');
         $sec = $this->omniCount(
             $this->omniQuery(
@@ -146,10 +146,10 @@ class DashboardController extends Controller
         }
 
         $mainUnitList = $this->omniCount(DB::table('trx_results')
-            ->select(['main_unit', 'nip'])
+            ->select(['trx_id','main_unit', 'nip'])
             ->whereRAW('LOWER(main_unit) LIKE ?', ["%{$trxID}%"])
             ->whereBetween('trx_start_date', [$start, $end])
-            ->distinct('nip')
+            //->distinct('trx_id')
             ->get(), 'main_unit');
 
         $data = [
@@ -365,12 +365,23 @@ class DashboardController extends Controller
     private function omniQuery($selectField = [], $whereField = [], $betweenField = [], $distinctField = [])
     {
         // resulting row of objects
-        $query = DB::table('trx_results')
-                    ->select($selectField)
-                    ->where($whereField)
-                    ->whereBetween($betweenField[0],$betweenField[1])
-                    ->distinct($distinctField)
-                    ->get();
+        if(empty($distinctField))
+        {
+            $query = DB::table('trx_results')
+                        ->select($selectField)
+                        ->where($whereField)
+                        ->whereBetween($betweenField[0],$betweenField[1])
+                        ->get();
+        }
+        else
+        {
+            $query = DB::table('trx_results')
+                        ->select($selectField)
+                        ->where($whereField)
+                        ->whereBetween($betweenField[0],$betweenField[1])
+                        ->distinct($distinctField)
+                        ->get();
+        }
 
         return $query;
     }
