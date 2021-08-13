@@ -121,7 +121,7 @@ class DashboardController extends Controller
             ['trx_id']
         );
 
-        if(isset($trxn[0]->trx_name))
+        if(!empty($trxn[0]->trx_name))
         {
             $q = trim(strtolower($trxn[0]->trx_name));
             $date = date_create($start);
