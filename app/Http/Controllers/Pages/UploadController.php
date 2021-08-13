@@ -192,6 +192,6 @@ class UploadController extends Controller
         $c = New CleanerHelper();
 
         // return $c->removeWhiteSpace($string);
-        return mb_convert_encoding($c->removeWhiteSpace($string), "UTF-8", "UTF-8");
+        return str_replace('\\', ' ', mb_convert_encoding($c->removeWhiteSpace($string), "UTF-8", "UTF-8"));
     }
 }
