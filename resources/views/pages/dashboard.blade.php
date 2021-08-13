@@ -306,7 +306,7 @@ var steps;
 var x = <?php echo $evagara; ?>;
 
 if(!empty(x)) {
-    x = JSON.parse(x)}
+    x = JSON.parse(x);
 
     var ctxEvagara = document.getElementById('chart-evagara');
     var chartEvagara = new Chart(ctxEvagara, {
