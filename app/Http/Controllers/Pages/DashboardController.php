@@ -54,7 +54,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['nip']),
             'gender');
         $cls = $this->omniCount(
             $this->omniQuery(
@@ -63,7 +63,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['nip']),
             'rank_class');
         $edu = $this->getAggregateEducation($start, $end, $whereTrxID);
         $pas = $this->omniCount(
@@ -73,7 +73,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['nip']),
             'graduate_status');
         $org = $this->omniCount(
             $this->omniQuery(
@@ -91,7 +91,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['main_unit']),
             'main_unit');
         $sec = $this->omniCount(
             $this->omniQuery(
@@ -100,7 +100,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['eselon2']),
             'eselon2');
         $des = $this->omniCount(
             $this->omniQuery(
@@ -109,7 +109,7 @@ class DashboardController extends Controller
                     $whereTrxID,
                 ],
                 ['trx_start_date', [$start, $end]],
-                ['trx_id']),
+                ['nip']),
             'position_desc');
 
         $data = [
